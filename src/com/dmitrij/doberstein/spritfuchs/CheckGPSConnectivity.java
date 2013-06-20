@@ -50,7 +50,7 @@ public class CheckGPSConnectivity implements ICheckConnecivity{
 				}
 			});
 		
-		alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+		alertDialogBuilder.setNegativeButton("Cancel\n", new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int id){
 				dialog.cancel();
 				activity.finish();
