@@ -4,5 +4,20 @@
     <string name="app_name">Spritfuchs</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main_activity_menu">MainActivityMenu</string>
+    <string name="title_activity_startpage">StartpageActivity</string>
+    <string name="x_position_text">x-Position</string>
+    <string name="y_position_text">y-Position</string>
+    <string name="button_vergleich">Vergleich</string>
+    <string name="umkreis_text">Umkreis</string>
+    <string name="button_config">Konfig</string>
+    <string name="button_info">Info</string>
+    <string name="defaul_wert">-----</string>
+    <string name="standort_text">Standort</string>
+    <string name="diesel_max_text"> Diesel max.:</string>
+    <string name="diesel_min_text">Diesel min.:</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
+    <string name="title_activity_pref">PrefActivity</string>
 
 </resources>
