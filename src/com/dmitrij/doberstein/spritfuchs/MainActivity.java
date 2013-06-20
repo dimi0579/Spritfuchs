@@ -7,30 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		setContentView(com.dmitrij.doberstein.spritfuchs.R.layout.activity_main);
-		
-//		Thread mythread = new Thread() {
-//            public void run() {
-//                try {
-//                    while (splashActive && ms < splashTime) {
-//                        if(!paused)
-//                            ms=ms+100;
-//                        sleep(100);
-//                    }
-//                } catch(Exception e) {}
-//                finally {
-//                    Intent intent = new Intent(Splash.this, Home.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        };
-//        mythread.start();
-//    }
 	}
 
 	@Override
@@ -43,7 +24,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStart(){
 		super.onStart();
-
 		
 		CheckWifiGpsConnectivity c = new CheckWifiGpsConnectivity(this);
 		final boolean check = c.checkConnectivity();
@@ -55,7 +35,6 @@ public class MainActivity extends Activity {
                         while(!check)
                         	sleep(1000);
                         
-
                     	sleep(7000);
 //                    }
                 } catch(Exception e) {}
@@ -67,20 +46,6 @@ public class MainActivity extends Activity {
             }
         };
         mythread.start();
-		
-		
-//		if(check){
-//			try {
-//				Thread.sleep(10000);
-//				
-//				Intent intent = new Intent (this, MainActivityMenu.class);
-//				startActivity(intent);
-//				finish();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
 	}
 	
 	@Override
