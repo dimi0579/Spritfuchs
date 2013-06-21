@@ -10,13 +10,17 @@ import org.ksoap2.transport.HttpTransportSE;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.TabActivity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class VergleichActivity extends Activity {
+public class VergleichActivity extends TabActivity {
 	private final String NAMESPACE = "http://tempuri.org/";
 	private final String URL = "http://www.w3schools.com/webservices/tempconvert.asmx";
 	private final String SOAP_ACTION = "http://tempuri.org/CelsiusToFahrenheit";
@@ -30,10 +34,35 @@ public class VergleichActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_vergleich);
 		
-		pbVergleich = (ProgressBar)findViewById(R.id.pbVergleich);
-		pbVergleich.setVisibility(View.VISIBLE);
 		
-		tv = (TextView) findViewById(R.id.tvTextview);
+		TabHost tabHost = getTabHost();
+        
+        // Tab for Photos
+        TabSpec photospec = tabHost.newTabSpec("Photos");
+        // setting Title and Icon for the Tab
+//        photospec.setIndicator("Photos", getResources().getDrawable(R.drawable.icon_photos_tab));
+        Intent photosIntent = new Intent(this, VergleichListeActivity.class);
+        photospec.setContent(photosIntent);
+         
+        // Tab for Songs
+        TabSpec songspec = tabHost.newTabSpec("Songs");       
+//        songspec.setIndicator("Songs", getResources().getDrawable(R.drawable.icon_songs_tab));
+        Intent songsIntent = new Intent(this, VergleichMapActivity.class);
+        songspec.setContent(songsIntent);
+         
+        // Adding all TabSpec to TabHost
+        tabHost.addTab(photospec); // Adding photos tab
+        tabHost.addTab(songspec); // Adding songs tab
+		
+		
+		
+		
+		
+		
+//		pbVergleich = (ProgressBar)findViewById(R.id.pbVergleich);
+//		pbVergleich.setVisibility(View.VISIBLE);
+//		
+//		tv = (TextView) findViewById(R.id.tvTextview);
 		
 		//Create instance for AsyncCallWS
         AsyncCallWS task = new AsyncCallWS();

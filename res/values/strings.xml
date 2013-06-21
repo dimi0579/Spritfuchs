@@ -22,5 +22,7 @@
     <string name="title_activity_vergleich">VergleichActivity</string>
     <string name="title_activity_info">InfoActivity</string>
     <string name="title_activity_conf">ConfActivity</string>
+    <string name="title_activity_vergleich_liste">VergleichListeActivity</string>
+    <string name="title_activity_vergleich_map">VergleichMapActivity</string>
 
 </resources>
