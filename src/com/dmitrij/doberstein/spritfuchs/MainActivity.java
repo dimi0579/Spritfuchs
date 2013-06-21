@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
                         while(!check)
                         	sleep(1000);
                         
-                    	sleep(2000);
+                    	sleep(5000);
 //                    }
                 } catch(Exception e) {}
                 finally {

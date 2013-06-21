@@ -1,6 +1,13 @@
 package com.dmitrij.doberstein.spritfuchs;
 
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.PropertyInfo;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +16,11 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivityMenu extends Activity {
-
+	private final String NAMESPACE = "http://tempuri.org/";
+	private final String URL = "http://www.w3schools.com/webservices/tempconvert.asmx";
+	private final String SOAP_ACTION = "http://tempuri.org/CelsiusToFahrenheit";
+	private final String METHOD_NAME = "CelsiusToFahrenheit";
+	
 	Button btnVergleich;
 	Button btnInfo;
 	Button btnConf;
