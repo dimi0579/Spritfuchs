@@ -1,17 +1,42 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivityMenu" 
-     android:background="@drawable/splash">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menue" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<RelativeLayout 
+        android:id="@+id/LinearLayout01"
+        android:orientation="horizontal" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button 
+            android:id="@+id/btnVergleich"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content" 
+	        android:text="Vergleich" 
+	        android:onClick="onClick"
+	        android:layout_alignParentLeft="true"/>
+	    <Button 
+	        android:id="@+id/btnInfo"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content" 
+	        android:text="Info"
+	        android:onClick="onClick"
+	        android:layout_centerInParent="true"/>
+	    <Button 
+	        android:id="@+id/btnConf"
+	        android:layout_width="100dp"
+	        android:layout_height="wrap_content"
+	        android:text="Conf" 
+	        android:onClick="onClick"
+	        android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+
+</LinearLayout>

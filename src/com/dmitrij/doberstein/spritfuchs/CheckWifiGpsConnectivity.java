@@ -20,7 +20,10 @@ public class CheckWifiGpsConnectivity implements ICheckConnecivity{
 			
 			boolean isWiFiEnabled = cc.checkConnectivity();
 			boolean isGPSEnabled = cgc.checkConnectivity();
-				
+			
+			// only for test
+			isWiFiEnabled = true;
+			
 			if(!isWiFiEnabled){
 				cc.showDialog();
 				return false;

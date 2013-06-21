@@ -19,5 +19,8 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_preferences">PreferencesActivity</string>
     <string name="title_activity_pref">PrefActivity</string>
+    <string name="title_activity_vergleich">VergleichActivity</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="title_activity_conf">ConfActivity</string>
 
 </resources>
