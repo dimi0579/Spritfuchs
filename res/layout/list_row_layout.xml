@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/tvTname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvTstrasseHausnr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvTname"
+        android:layout_below="@+id/tvTname"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvTplzOrt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvTstrasseHausnr"
+        android:layout_below="@+id/tvTstrasseHausnr"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvTentfernung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvTplzOrt"
+        android:layout_below="@+id/tvTplzOrt"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvTdiesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvTstrasseHausnr"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvTe5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvTstrasseHausnr"
+        android:layout_alignBottom="@+id/tvTstrasseHausnr"
+        android:layout_alignLeft="@+id/tvTdiesel"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvTe10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvTplzOrt"
+        android:layout_alignBottom="@+id/tvTplzOrt"
+        android:layout_alignLeft="@+id/tvTe5"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+ 
+</RelativeLayout>

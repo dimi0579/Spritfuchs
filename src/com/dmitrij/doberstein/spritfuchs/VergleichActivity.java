@@ -1,147 +1,235 @@
 package com.dmitrij.doberstein.spritfuchs;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.TabActivity;
-import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class VergleichActivity extends TabActivity {
-	private final String NAMESPACE = "http://tempuri.org/";
-	private final String URL = "http://www.w3schools.com/webservices/tempconvert.asmx";
-	private final String SOAP_ACTION = "http://tempuri.org/CelsiusToFahrenheit";
-	private final String METHOD_NAME = "CelsiusToFahrenheit";
-	
-	ProgressBar pbVergleich;
-	TextView tv;
+import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
+
+
+public class VergleichActivity extends Activity implements  MyListener{
+	private ListView lv1;
+	LocationManager locationManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_vergleich);
-		
-		
-		TabHost tabHost = getTabHost();
+		setContentView(R.layout.activity_info);
+
+        lv1 = (ListView) findViewById(R.id.list_tankstellen);
+//        lv1.setAdapter(new CustomListAdapter(this, image_details));
         
-        // Tab for Photos
-        TabSpec photospec = tabHost.newTabSpec("Photos");
-        // setting Title and Icon for the Tab
-//        photospec.setIndicator("Photos", getResources().getDrawable(R.drawable.icon_photos_tab));
-        Intent photosIntent = new Intent(this, VergleichListeActivity.class);
-        photospec.setContent(photosIntent);
-         
-        // Tab for Songs
-        TabSpec songspec = tabHost.newTabSpec("Songs");       
-//        songspec.setIndicator("Songs", getResources().getDrawable(R.drawable.icon_songs_tab));
-        Intent songsIntent = new Intent(this, VergleichMapActivity.class);
-        songspec.setContent(songsIntent);
-         
-        // Adding all TabSpec to TabHost
-        tabHost.addTab(photospec); // Adding photos tab
-        tabHost.addTab(songspec); // Adding songs tab
-		
-		
-		
-		
-		
-		
-//		pbVergleich = (ProgressBar)findViewById(R.id.pbVergleich);
-//		pbVergleich.setVisibility(View.VISIBLE);
-//		
-//		tv = (TextView) findViewById(R.id.tvTextview);
-		
-		//Create instance for AsyncCallWS
-        AsyncCallWS task = new AsyncCallWS();
-        //Call execute
-        task.execute();
-	}
+        lv1.setOnItemClickListener(new OnItemClickListener() {
+ 
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+            	TankstellenPosition tp = (TankstellenPosition) lv1.getItemAtPosition(position);
+            	Toast.makeText(VergleichActivity.this, "Selected: " + tp.getTankstelleName(), Toast.LENGTH_LONG).show();
+            }
+ 
+        });
+        
+     // gps location
+     		try {
+     			locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//     			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this.locationListener);
 
+     		} catch (Exception e) {
+     			// TODO: handle exception
+     		}		
+	}
+	public void setListView(ArrayList<TankstellenPosition> data){
+		lv1.setAdapter(new CustomListAdapter(this, data));
+	}
+	@SuppressWarnings("unused")
+	private ArrayList<TankstellenPosition> getListData() {
+        ArrayList<TankstellenPosition> results = new ArrayList<TankstellenPosition>();
+        
+        TankstellenPosition tp = new TankstellenPosition();
+        tp.setTankstelleName("Test1");
+        tp.setTankstelleStrasse("teststr.");
+        tp.setTankstelleHausnr("1");
+        tp.setTankstellePlz("11111");
+        tp.setTankstelleOrt("testort 1");
+        tp.setTankstelleEntfernung("111");
+        tp.setTankstelleDiesel("1,30");
+        tp.setTankstelleE5("1,50");
+        tp.setTankstelleE10("1,60");
+        results.add(tp);
+
+        tp = new TankstellenPosition();
+        tp.setTankstelleName("Test2");
+        tp.setTankstelleStrasse("teststr.");
+        tp.setTankstelleHausnr("2");
+        tp.setTankstellePlz("22222");
+        tp.setTankstelleOrt("testort 2");
+        tp.setTankstelleEntfernung("222");
+        tp.setTankstelleDiesel("1,33");
+        tp.setTankstelleE5("1,53");
+        tp.setTankstelleE10("1,63");
+        results.add(tp);
+
+        tp = new TankstellenPosition();
+        tp.setTankstelleName("Test3");
+        tp.setTankstelleStrasse("teststr.");
+        tp.setTankstelleHausnr("3");
+        tp.setTankstellePlz("333");
+        tp.setTankstelleOrt("testort 3");
+        tp.setTankstelleEntfernung("333");
+        tp.setTankstelleDiesel("1,36");
+        tp.setTankstelleE5("1,56");
+        tp.setTankstelleE10("1,66");
+        results.add(tp);
+        
+        return results;
+	}
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.vergleich, menu);
-		return true;
+	protected void onStart(){
+		super.onStart();
+        //*****************************************************************************************************
+		// Create a progress bar to display while the list loads
+//		progressBar = new ProgressBar(this);
+//		progressBar.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+//		progressBar.setIndeterminate(true);
+//		lv1.setEmptyView(progressBar);
+//		
+//		// Must add the progress bar to the root of the layout
+//		ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+//		root.addView(progressBar);
+		//******************************************************************************************************
+		
+		getData();
 	}
+	private final LocationListener gpsLocationListener = new LocationListener() {
 
-	// Private Class AsyncCallWS
-	private class AsyncCallWS extends AsyncTask<String, Void, Void> {
-		private String TAG = "AsyncCallWS";
-	    @Override
-	    protected Void doInBackground(String... params) {
-	        Log.i(TAG, "doInBackground");
-	        getData(5.0);
-	        return null;
-	    }
-	
-	    @Override
-	    protected void onPostExecute(Void result) {
-	        Log.i(TAG, "onPostExecute");
-//	        tv.setText(fahren + "° F");
-//	        pbVergleich.setVisibility(View.GONE);
-	        
-	    }
-	
-	    @Override
-	    protected void onPreExecute() {
-	        Log.i(TAG, "onPreExecute");
-//	        tv.setText("Calculating...");
-	    }
-	
-	    @Override
-	    protected void onProgressUpdate(Void... values) {
-	        Log.i(TAG, "onProgressUpdate");
-	    }
-	
-	}
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            switch (status) {
+            case LocationProvider.AVAILABLE:
+//                textView.setText(textView.getText().toString() + "GPS available again\n");
+                break;
+            case LocationProvider.OUT_OF_SERVICE:
+//                textView.setText(textView.getText().toString() + "GPS out of service\n");
+                break;
+            case LocationProvider.TEMPORARILY_UNAVAILABLE:
+//                textView.setText(textView.getText().toString() + "GPS temporarily unavailable\n");
+                break;
+            }
+        }
 
-	public void getData(double celsius) {
-	    //Create request
-	    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-	    //Property which holds input parameters
-	    PropertyInfo celsiusPI = new PropertyInfo();
-	    //Set Name
-	    celsiusPI.setName("Celsius");
-	    //Set Value
-	    celsiusPI.setValue(celsius);
-	    //Set dataType
-	    celsiusPI.setType(double.class);
-	    //Add the property to request object
-	    request.addProperty(celsiusPI);
-	    //Create envelope
-	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-	    envelope.dotNet = true;
-	    //Set output SOAP object
-	    envelope.setOutputSoapObject(request);
-	    //Create HTTP call object
-	    HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-	 
-	    try {
-	        //Invole web service
-	        androidHttpTransport.call(SOAP_ACTION, envelope);
-	        //Get the response
-	        SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
-	        //Assign it to fahren static variable
-	        String test = response.toString();
-	        tv.setText(test);
-	        pbVergleich.setVisibility(View.GONE);
-	 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        pbVergleich.setVisibility(View.GONE);
-	    }
-	}
+        @Override
+        public void onProviderEnabled(String provider) {
+//            textView.setText(textView.getText().toString() + "GPS Provider Enabled\n");
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+//            textView.setText(textView.getText().toString() + "GPS Provider Disabled\n");
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {
+            locationManager.removeUpdates(networkLocationListener);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
+        	String datum = sdf.format(Calendar.getInstance().getTime());
+        	
+           String str = "New GPS location: \n"
+                    + String.format("%9.6f", location.getLatitude()) + ", "
+                    + String.format("%9.6f", location.getLongitude()) + "\n" + 
+                    datum;
+           
+           Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
+           
+           getData();
+        }
+    };
+
+    private final LocationListener networkLocationListener = new LocationListener() {
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            switch (status) {
+            case LocationProvider.AVAILABLE:
+//                textView.setText(textView.getText().toString() + "Network location available again\n");
+                break;
+            case LocationProvider.OUT_OF_SERVICE:
+//                textView.setText(textView.getText().toString() + "Network location out of service\n");
+                break;
+            case LocationProvider.TEMPORARILY_UNAVAILABLE:
+//                textView.setText(textView.getText().toString() + "Network location temporarily unavailable\n");
+                break;
+            }
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+//            textView.setText(textView.getText().toString() + "Network Provider Enabled\n");
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+//            textView.setText(textView.getText().toString() + "Network Provider Disabled\n");
+        }
+
+        @Override
+        public void onLocationChanged(Location location) {        	
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
+        	String datum = sdf.format(Calendar.getInstance().getTime());
+        	
+            String str = "New network location: \n"
+                    + String.format("%9.9f", location.getLatitude()) + ", "
+                    + String.format("%9.9f", location.getLongitude()) + "\n" + 
+                    datum;
+            
+            Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
+            
+            getData();
+        }
+    };
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 6000, 1, networkLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 1, gpsLocationListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        locationManager.removeUpdates(networkLocationListener);
+        locationManager.removeUpdates(gpsLocationListener);
+    }
+    
+    public void getData(){
+
+		CheckWifiGpsConnectivity cc = new CheckWifiGpsConnectivity(this);
+		final boolean check = cc.checkConnectivity();
+		if(!check){
+			this.finish();
+		}
+		AsyncCallWS task = new AsyncCallWS("", "", "", this);
+		task.setListener(this);
+		task.execute(); 
+    }
 }

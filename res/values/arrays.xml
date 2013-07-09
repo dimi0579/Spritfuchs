@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sKraftstoff">
+        <item name="1">Diesel</item>
+        <item name="2">E5</item>
+        <item name="3">E10</item>
+    </string-array>
+    <string-array name="sKraftstoffValues">
+        <item name="1">1</item>
+        <item name="2">2</item>
+        <item name="3">3</item>
+    </string-array>
+    
+    <string-array name="sUmkreis">
+        <item name="1">kein</item>
+        <item name="2">10</item>
+        <item name="3">25</item>
+        <item name="4">50</item>
+        <item name="5">100</item>        
+    </string-array>
+    <string-array name="sUmkreisValues">
+        <item name="1">0</item>
+        <item name="2">10</item>
+        <item name="3">25</item>
+        <item name="4">50</item>
+        <item name="5">100</item>
+    </string-array>
+     
+</resources>

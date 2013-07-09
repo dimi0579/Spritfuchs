@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+ 
+    <PreferenceCategory android:title="Kraftstoff Einstellungen" >
+ 
+        <ListPreference
+            android:key="prefKraftstoff"
+            android:entries="@array/sKraftstoff"
+            android:summary=""
+            android:entryValues="@array/sKraftstoffValues"
+            android:defaultValue="1"
+            android:title="Kraftstoff" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Umkreis Einstellungen" >
+ 
+        <ListPreference
+            android:key="prefUmkreis"
+            android:entries="@array/sUmkreis"
+            android:summary=""
+            android:entryValues="@array/sUmkreisValues"
+            android:defaultValue="10"
+            android:title="Umkreis" />
+    </PreferenceCategory>
+ 
+</PreferenceScreen>
