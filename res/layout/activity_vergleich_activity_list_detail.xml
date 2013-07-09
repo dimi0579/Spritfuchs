@@ -6,12 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ConfActivity" >
+    tools:context=".VergleichActivityListDetail" >
 
-    <ListView
-	  android:id="@+id/list_tankstellen"
-	  android:layout_width="match_parent"
-	  android:layout_height="wrap_content" >
-	</ListView>
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FirmenName" />
+    
+    <TextView
+        android:id="@+id/tvDetailAnschrift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FirmenAnschrift" />
 
 </RelativeLayout>

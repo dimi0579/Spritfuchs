@@ -90,6 +90,10 @@
             android:name="com.dmitrij.doberstein.spritfuchs.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail"
+            android:label="@string/title_activity_vergleich_activity_list_detail" >
+        </activity>
     </application>
 
 </manifest>

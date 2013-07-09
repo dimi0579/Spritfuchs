@@ -30,7 +30,7 @@ public class VergleichActivity extends Activity implements  MyListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_info);
+		setContentView(R.layout.activity_vergleich);
 
         lv1 = (ListView) findViewById(R.id.list_tankstellen);
 //        lv1.setAdapter(new CustomListAdapter(this, image_details));
@@ -232,4 +232,9 @@ public class VergleichActivity extends Activity implements  MyListener{
 		task.setListener(this);
 		task.execute(); 
     }
+	@Override
+	public void setListDetailView(TankstellenPosition data) {
+		// TODO Auto-generated method stub
+		
+	}
 }
