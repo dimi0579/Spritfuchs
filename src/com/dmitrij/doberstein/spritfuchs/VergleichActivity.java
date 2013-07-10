@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -39,8 +40,10 @@ public class VergleichActivity extends Activity implements  MyListener{
  
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-            	TankstellenPosition tp = (TankstellenPosition) lv1.getItemAtPosition(position);
-            	Toast.makeText(VergleichActivity.this, "Selected: " + tp.getTankstelleName(), Toast.LENGTH_LONG).show();
+            	Intent intent = new Intent(VergleichActivity.this, VergleichActivityListDetail.class);
+				startActivity(intent);
+//            	TankstellenPosition tp = (TankstellenPosition) lv1.getItemAtPosition(position);
+//            	Toast.makeText(VergleichActivity.this, "Selected: " + tp.getTankstelleName(), Toast.LENGTH_LONG).show();
             }
  
         });
@@ -209,8 +212,8 @@ public class VergleichActivity extends Activity implements  MyListener{
     protected void onResume() {
         super.onResume();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 6000, 1, networkLocationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 1, gpsLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 45000, 50, networkLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 50, gpsLocationListener);
     }
 
     @Override
