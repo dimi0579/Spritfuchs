@@ -11,12 +11,21 @@ import android.view.Menu;
 import android.widget.TextView;
 
 public class VergleichActivityListDetail extends Activity implements  MyListener {
-	TextView tvFirmenName;
-	TextView tvFirmenAnschrift;
+	private TextView tvFirmenName;
+	private TextView tvFirmenAnschrift;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_vergleich_activity_list_detail);
+		try {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_vergleich_activity_list_detail);
+			
+			tvFirmenName = (TextView)findViewById(R.id.tvDetailName);
+			tvFirmenAnschrift = (TextView) findViewById(R.id.tvDetailAnschrift);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
 		
 	}
 
@@ -54,5 +63,11 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 				"\n" + data.getTankstellePlz() + " - " + data.getTankstelleOrt();
 		tvFirmenAnschrift.setText(anschrift);
 		
+	}
+	@Override
+	protected void onStart(){
+		super.onStart();
+
+		this.getData();
 	}
 }
