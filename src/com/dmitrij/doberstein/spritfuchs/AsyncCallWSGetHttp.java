@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.dmitrij.doberstein.spritfuchs.Utils.ObjectTypes;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 // For async SOAP connection
@@ -21,6 +22,7 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 	private static final String VA = "VergleichActivity";
 	private static final String VALD = "VergleichActivityListDetail";
+	private static final String XMLHEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	
 	private MyListener listener;
 	public void setListener(MyListener listener) {
@@ -63,7 +65,10 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
         	String objectClassName = this.myActivity.getClass().getName();
 
         	if(VA.equalsIgnoreCase(objectClassName)){
-        		listener.setListView(getListData());
+        		@SuppressWarnings("unchecked")
+				ArrayList<TankstellenPosition> tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE);
+        		listener.setListView(tankstellen);
+//        		listener.setListView(getListData());
         	}
         	else if(VALD.equalsIgnoreCase(objectClassName)){
         		listener.setListDetailView(getListDetailData());
@@ -118,6 +123,13 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
             HttpGet httpget = new HttpGet(URL);
            ResponseHandler<String> responseHandler = new BasicResponseHandler();
            returnString = Client.execute(httpget, responseHandler);
+           
+           // extrahiere xml aus dem response
+           returnString = Utils.extracXml(returnString);
+
+           
+           
+           String ret = "";
        }
      catch(Exception ex)
         {
