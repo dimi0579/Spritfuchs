@@ -1,6 +1,7 @@
 package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.R;
+import com.dmitrij.doberstein.spritfuchs.SortePreis;
 
 public class CustomListAdapter extends BaseAdapter {
 	 
@@ -61,10 +63,28 @@ public class CustomListAdapter extends BaseAdapter {
         
         holder.tankstelleEntfernung.setText("Entfernung: " + tp.getTankstelleEntfernung());
         
-        holder.tankstelleDiesel.setText("Diesel: " + tp.getTankstelleDiesel());
-        holder.tankstelleE5.setText("E5: " + tp.getTankstelleE5());
-        holder.tankstelleE10.setText("E10: " + tp.getTankstelleE10());
- 
+        List<SortePreis> asp = tp.getTankstellePreise();
+        if(asp != null){
+        	for(int i = 0; i < asp.size(); i++){
+        		SortePreis sp = asp.get(i);
+        		switch(Integer.parseInt(sp.getSorteId())){
+        		// E5
+        		case 1:
+        			holder.tankstelleE5.setText("E5: " + sp.getPreis() + " €");
+        			break;
+        		// E10
+        		case 2:
+        			holder.tankstelleE10.setText("E10: " + sp.getPreis() + " €");
+        			break;
+        		// Diesel
+        		case 3:
+        			holder.tankstelleDiesel.setText("Diesel: " + sp.getPreis() + " €");
+        			break;
+        		default:
+        			break;
+        		}
+        	}
+        }
         return convertView;
     }
  

@@ -1,6 +1,11 @@
 package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
+import java.util.List;
+
+import com.dmitrij.doberstein.spritfuchs.SortePreis;
+
 public class TankstellenPosition {
+	private String tankstelleId;
 	private String tankstelleName;
 	private String tankstelleStrasse;
 	private String tankstelleHausnr;
@@ -10,7 +15,49 @@ public class TankstellenPosition {
 	private String tankstelleDiesel;
 	private String tankstelleE5;
 	private String tankstelleE10;
+	private String tankstelleMarke;
+	private String tankstelleLatitude;
+	private String tankstelleLongtitude;
+	private String tankstelleGemeldet;
 	
+	private List<SortePreis> tankstellePreise;
+		
+	public List<SortePreis> getTankstellePreise() {
+		return tankstellePreise;
+	}
+	public void setTankstellePreise(List<SortePreis> tankstellePreise) {
+		this.tankstellePreise = tankstellePreise;
+	}
+	public String getTankstelleGemeldet() {
+		return tankstelleGemeldet;
+	}
+	public void setTankstelleGemeldet(String tankstelleGemeldet) {
+		this.tankstelleGemeldet = tankstelleGemeldet;
+	}
+	public String getTankstelleLatitude() {
+		return tankstelleLatitude;
+	}
+	public void setTankstelleLatitude(String tankstelleLatitude) {
+		this.tankstelleLatitude = tankstelleLatitude;
+	}
+	public String getTankstelleLongtitude() {
+		return tankstelleLongtitude;
+	}
+	public void setTankstelleLongtitude(String tankstelleLongtitude) {
+		this.tankstelleLongtitude = tankstelleLongtitude;
+	}
+	public String getTankstelleMarke() {
+		return tankstelleMarke;
+	}
+	public void setTankstelleMarke(String tankstelleMarke) {
+		this.tankstelleMarke = tankstelleMarke;
+	}
+	public String getTankstelleId() {
+		return tankstelleId;
+	}
+	public void setTankstelleId(String tankstelleId) {
+		this.tankstelleId = tankstelleId;
+	}
 	public String getTankstellePlz() {
 		return tankstellePlz;
 	}
@@ -69,6 +116,7 @@ public class TankstellenPosition {
 	@Override
 	public String toString() {
 		return "[" +
+					"tankstelleId=" + tankstelleId + 
 					"tankstelleName=" + tankstelleName +
 					",tankstelleStrasse=" + tankstelleStrasse + 
 					",tankstelleHausnr=" + tankstelleHausnr + 

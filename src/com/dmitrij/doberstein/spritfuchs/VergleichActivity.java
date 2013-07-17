@@ -231,9 +231,12 @@ public class VergleichActivity extends Activity implements  MyListener{
 		if(!check){
 			this.finish();
 		}
-		AsyncCallWS task = new AsyncCallWS("", "", "", this);
+//		AsyncCallWS task = new AsyncCallWS("", "", "", this);
+//		task.setListener(this);
+//		task.execute(); 
+		AsyncCallWSGetHttp task = new AsyncCallWSGetHttp("", "", "", this);
 		task.setListener(this);
-		task.execute(); 
+		task.execute();
     }
 	@Override
 	public void setListDetailView(TankstellenPosition data) {

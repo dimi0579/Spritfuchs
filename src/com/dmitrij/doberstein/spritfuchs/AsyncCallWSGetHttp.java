@@ -20,8 +20,8 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 //task.execute(); 
 
 public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
-	private static final String VA = "VergleichActivity";
-	private static final String VALD = "VergleichActivityListDetail";
+	private static final String VA = "com.dmitrij.doberstein.spritfuchs.VergleichActivity";
+	private static final String VALD = "com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail";
 	private static final String XMLHEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	
 	private MyListener listener;
@@ -66,9 +66,8 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 
         	if(VA.equalsIgnoreCase(objectClassName)){
         		@SuppressWarnings("unchecked")
-				ArrayList<TankstellenPosition> tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE);
+				ArrayList<TankstellenPosition> tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE, this.returnString);
         		listener.setListView(tankstellen);
-//        		listener.setListView(getListData());
         	}
         	else if(VALD.equalsIgnoreCase(objectClassName)){
         		listener.setListDetailView(getListDetailData());
@@ -114,13 +113,13 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
         HttpClient Client = new DefaultHttpClient();
     
      // Create URL strinG
-      String URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLE";
+      String URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLEN";
       Log.i("httpget", URL);
 		
       try
       {
           // Create Request to server and get response  
-            HttpGet httpget = new HttpGet(URL);
+           HttpGet httpget = new HttpGet(URL);
            ResponseHandler<String> responseHandler = new BasicResponseHandler();
            returnString = Client.execute(httpget, responseHandler);
            
