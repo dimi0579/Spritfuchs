@@ -9,7 +9,9 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.dmitrij.doberstein.spritfuchs.Utils.ObjectTypes;
@@ -34,20 +36,34 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 	@SuppressWarnings("unused")
 	private String url = "";
 	@SuppressWarnings("unused")
-	private String methodename = "";
+	private String params = "";
 	private Object myActivity;
 	private ProgressDialog progDialog;
 	
 	private String returnString = "";
+	private String xlat = "";
+	private String xlong = "";
+	private String umkreis = "";
 	
 	AsyncCallWSGetHttp(){
 		
 	}
-	AsyncCallWSGetHttp(String namespace, String url, String methodename, Object activity){
+	AsyncCallWSGetHttp(String namespace, String url, String params, Object activity){
 		this.namespace = namespace;
 		this.url = url;
-		this.methodename = methodename;
+		this.params = params;
 		this.myActivity = activity;
+		
+		// parameter extrahieren bzw setzen**********************
+		if(params != null && params.length() > 0){
+			String[] temp = params.split(";");
+			if(temp.length == 3){
+				xlat = temp[0];
+				xlong = temp[1];
+				umkreis = temp[2];
+			}
+		}
+		//********************************************************
 		
 		this.returnString = "";
 	}
@@ -113,7 +129,8 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
         HttpClient Client = new DefaultHttpClient();
     
      // Create URL strinG
-      String URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLEN";
+      String URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLEN&lat=" + 
+    		  xlat + "&long=" + xlong + "&umkreis=" + umkreis;
       Log.i("httpget", URL);
 		
       try
