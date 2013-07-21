@@ -234,7 +234,12 @@ public class VergleichActivity extends Activity implements  MyListener{
 //		AsyncCallWS task = new AsyncCallWS("", "", "", this);
 //		task.setListener(this);
 //		task.execute(); 
-		AsyncCallWSGetHttp task = new AsyncCallWSGetHttp("", "", "", this);
+		
+		// TODO hier sollen nun die parameter übergeben werden
+		// xlat;xlong;umkreis
+		String params = "";
+		
+		AsyncCallWSGetHttp task = new AsyncCallWSGetHttp("", "", params, this);
 		task.setListener(this);
 		task.execute();
     }
