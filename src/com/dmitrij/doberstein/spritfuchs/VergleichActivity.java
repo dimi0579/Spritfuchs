@@ -8,11 +8,13 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,6 +29,9 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 public class VergleichActivity extends Activity implements  MyListener{
 	private ListView lv1;
 	LocationManager locationManager;
+	
+	private String xlat = "";
+	private String xlong = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +122,24 @@ public class VergleichActivity extends Activity implements  MyListener{
 //		ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
 //		root.addView(progressBar);
 		//******************************************************************************************************
-		
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 45000, 50, networkLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 50, gpsLocationListener);
+        
+        Location loc = null;
+        if(locationManager.getProvider(LocationManager.GPS_PROVIDER) != null){
+        	loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        	xlat = String.format("%9.6f", loc.getLatitude());
+            xlong = String.format("%9.6f", loc.getLongitude());
+        }
+        else if(locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null){
+        	loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        	xlat = String.format("%9.6f", loc.getLatitude());
+            xlong = String.format("%9.6f", loc.getLongitude());
+        }
+        else{
+        	return;
+        }
 		getData();
 	}
 	private final LocationListener gpsLocationListener = new LocationListener() {
@@ -161,6 +183,8 @@ public class VergleichActivity extends Activity implements  MyListener{
            
            Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
            
+           xlat = String.format("%9.6f", location.getLatitude());
+           xlong = String.format("%9.6f", location.getLongitude());
            getData();
         }
     };
@@ -185,7 +209,6 @@ public class VergleichActivity extends Activity implements  MyListener{
         @Override
         public void onProviderEnabled(String provider) {
 //            textView.setText(textView.getText().toString() + "Network Provider Enabled\n");
-
         }
 
         @Override
@@ -204,7 +227,9 @@ public class VergleichActivity extends Activity implements  MyListener{
                     datum;
             
             Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
-            
+
+            xlat = String.format("%9.6f", location.getLatitude());
+            xlong = String.format("%9.6f", location.getLongitude());
             getData();
         }
     };
@@ -238,6 +263,14 @@ public class VergleichActivity extends Activity implements  MyListener{
 		// TODO hier sollen nun die parameter übergeben werden
 		// xlat;xlong;umkreis
 		String params = "";
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		// then you use
+		String tempUmkreis = prefs.getString("prefUmkreis", "5");
+		
+		xlat = xlat.replace(",", ".").trim();
+		xlong = xlong.replace(",", ".").trim();
+		params = xlat + ";" + xlong + ";" + tempUmkreis;
+		
 		
 		AsyncCallWSGetHttp task = new AsyncCallWSGetHttp("", "", params, this);
 		task.setListener(this);
