@@ -84,6 +84,12 @@ public class Utils {
 						tp.setTankstelleOrt(getValue("ort", element));
 						tp.setTankstelleGemeldet(getValue("gemeldet", element));
 						
+						// distnaz auf zwei nachkommastellen kürzen
+						String distanz = getValue("distanz", element);
+						float dist = Float.parseFloat(distanz);
+						tp.setTankstelleEntfernung(String.format("%8.2f", dist));
+						//********************************************************
+						
 						Element lastNode = (Element)node.getLastChild();
 						String lastNodeName = lastNode.getNodeName();
 						if("sortepreise".equalsIgnoreCase(lastNodeName)){
