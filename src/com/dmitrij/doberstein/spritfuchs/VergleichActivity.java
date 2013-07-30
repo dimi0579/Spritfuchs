@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -19,7 +21,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
@@ -64,7 +65,20 @@ public class VergleichActivity extends Activity implements  MyListener{
      		}		
 	}
 	public void setListView(ArrayList<TankstellenPosition> data){
-		lv1.setAdapter(new CustomListAdapter(this, data));
+		if(data.size() > 0){
+			lv1.setAdapter(new CustomListAdapter(this, data));
+		}
+		else{
+			new AlertDialog.Builder(this)
+		    .setTitle("Error")
+		    .setMessage("Actually are no data available!")
+		    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		            VergleichActivity.this.finish();
+		        }
+		     })
+		     .show();
+		}
 	}
 	@SuppressWarnings("unused")
 	private ArrayList<TankstellenPosition> getListData() {
@@ -265,12 +279,16 @@ public class VergleichActivity extends Activity implements  MyListener{
 		// xlat;xlong;umkreis
 		String params = "";
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		// then you use
+		
+		// get Umkreis -> default - 5 km
 		String tempUmkreis = prefs.getString("prefUmkreis", "5");
+		
+		// get Kraftstoff -> default - Diesel (1)
+		String tempKraftstoff = prefs.getString("prefKraftstoff", "1");
 		
 		xlat = xlat.replace(",", ".").trim();
 		xlong = xlong.replace(",", ".").trim();
-		params = xlat + ";" + xlong + ";" + tempUmkreis;
+		params = xlat + ";" + xlong + ";" + tempUmkreis + ";" + tempKraftstoff;
 		
 		
 		AsyncCallWSGetHttp task = new AsyncCallWSGetHttp("", "", params, this);

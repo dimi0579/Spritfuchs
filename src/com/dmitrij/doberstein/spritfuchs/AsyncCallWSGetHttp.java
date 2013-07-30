@@ -9,9 +9,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.dmitrij.doberstein.spritfuchs.Utils.ObjectTypes;
@@ -44,6 +42,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 	private String xlat = "";
 	private String xlong = "";
 	private String umkreis = "";
+	private String kraftstoff= "";
 	
 	AsyncCallWSGetHttp(){
 		
@@ -57,10 +56,11 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 		// parameter extrahieren bzw setzen**********************
 		if(params != null && params.length() > 0){
 			String[] temp = params.split(";");
-			if(temp.length == 3){
+			if(temp.length == 4){
 				xlat = temp[0];
 				xlong = temp[1];
 				umkreis = temp[2];
+				kraftstoff = temp[3];
 			}
 		}
 		//********************************************************
@@ -74,15 +74,22 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     protected void onPostExecute(Void result) {
     	super.onPreExecute(); 
         try { 
         	String objectClassName = this.myActivity.getClass().getName();
 
         	if(VA.equalsIgnoreCase(objectClassName)){
-        		@SuppressWarnings("unchecked")
-				ArrayList<TankstellenPosition> tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE, this.returnString);
+				ArrayList<TankstellenPosition> tankstellen = new ArrayList<TankstellenPosition>();
+        		if(this.returnString != null){
+        			tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE, this.returnString);
+        		}
+        		
+        		// sortiere diesel -> muss noch umgebaut werden...
+//        		Collections.sort(tankstellen, new PreisComparator());
+        		
         		listener.setListView(tankstellen);
         	}
         	else if(VALD.equalsIgnoreCase(objectClassName)){
@@ -130,7 +137,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
     
      // Create URL strinG
       String URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLEN&lat=" + 
-    		  xlat + "&long=" + xlong + "&umkreis=" + umkreis;
+    		  xlat + "&long=" + xlong + "&umkreis=" + umkreis + "&kraftstoff=" + kraftstoff;
       Log.i("httpget", URL);
 		
       try
@@ -142,17 +149,15 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
            
            // extrahiere xml aus dem response
            returnString = Utils.extracXml(returnString);
-
-           
-           
-           String ret = "";
        }
      catch(Exception ex)
         {
+    	 returnString = "";
     	 Log.i("error", ex.toString());
          }
 	}
 
+	@SuppressWarnings("unused")
 	private ArrayList<TankstellenPosition> getListData() {
         ArrayList<TankstellenPosition> results = new ArrayList<TankstellenPosition>();
         
