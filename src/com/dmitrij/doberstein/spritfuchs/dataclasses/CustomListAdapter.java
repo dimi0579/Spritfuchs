@@ -56,12 +56,12 @@ public class CustomListAdapter extends BaseAdapter {
             holder.tankstellePlzOrt = (TextView) convertView.findViewById(R.id.tvTplzOrt);
             holder.tankstelleEntfernung = (TextView) convertView.findViewById(R.id.tvTentfernung);
             holder.tankstelleDiesel = (TextView) convertView.findViewById(R.id.tvTdiesel);
-            holder.tankstelleE5 = (TextView) convertView.findViewById(R.id.tvTe5);
-            holder.tankstelleE10 = (TextView) convertView.findViewById(R.id.tvTe10);
+//            holder.tankstelleE5 = (TextView) convertView.findViewById(R.id.tvTe5);
+//            holder.tankstelleE10 = (TextView) convertView.findViewById(R.id.tvTe10);
             
             holder.tankstelleLDiesel = (TextView)convertView.findViewById(R.id.tvLdiesel);
-            holder.tankstelleLE5 = (TextView)convertView.findViewById(R.id.tvLe5);
-            holder.tankstelleLE10 = (TextView)convertView.findViewById(R.id.tvLe10);
+//            holder.tankstelleLE5 = (TextView)convertView.findViewById(R.id.tvLe5);
+//            holder.tankstelleLE10 = (TextView)convertView.findViewById(R.id.tvLe10);
             
             
             
@@ -74,46 +74,40 @@ public class CustomListAdapter extends BaseAdapter {
             catch (Exception e) {
 			}
             
-//            float ts = 0f;
-			switch(intKraftstoff){
-            case 1:
-        	default:
-//        		ts = holder.tankstelleE5.getTextSize();
-        		holder.tankstelleDiesel.setTypeface(null, Typeface.BOLD);
-        		holder.tankstelleLDiesel.setTypeface(null,Typeface.BOLD);
-        		holder.tankstelleE5.setTypeface(null, Typeface.NORMAL);
-        		holder.tankstelleLE5.setTypeface(null,Typeface.NORMAL);
-        		holder.tankstelleE10.setTypeface(null, Typeface.NORMAL);
-        		holder.tankstelleLE10.setTypeface(null,Typeface.NORMAL);
-//        		holder.tankstelleDiesel.setTextSize(ts + 2);
-//        		holder.tankstelleE5.setTextSize(ts);
-//        		holder.tankstelleE10.setTextSize(ts);
-            	break;
-            case 2:
-//        		ts = holder.tankstelleDiesel.getTextSize();
-        		holder.tankstelleDiesel.setTypeface(null, Typeface.NORMAL);
-        		holder.tankstelleLDiesel.setTypeface(null,Typeface.NORMAL);
-        		holder.tankstelleE5.setTypeface(null, Typeface.BOLD);
-        		holder.tankstelleLE5.setTypeface(null,Typeface.BOLD);
-        		holder.tankstelleE10.setTypeface(null, Typeface.NORMAL);
-        		holder.tankstelleLE10.setTypeface(null,Typeface.NORMAL);
-//        		holder.tankstelleDiesel.setTextSize(ts);
-//        		holder.tankstelleE5.setTextSize(ts + 2);
-//        		holder.tankstelleE10.setTextSize(ts);
-            	break;
-            case 3:
-//        		ts = holder.tankstelleDiesel.getTextSize();
-        		holder.tankstelleDiesel.setTypeface(null, Typeface.NORMAL);
-        		holder.tankstelleLDiesel.setTypeface(null,Typeface.NORMAL);
-        		holder.tankstelleE5.setTypeface(null, Typeface.NORMAL);
-        		holder.tankstelleLE5.setTypeface(null,Typeface.NORMAL);
-        		holder.tankstelleE10.setTypeface(null, Typeface.BOLD);
-        		holder.tankstelleLE10.setTypeface(null,Typeface.BOLD);
-//        		holder.tankstelleDiesel.setTextSize(ts);
-//        		holder.tankstelleE5.setTextSize(ts);
-//        		holder.tankstelleE10.setTextSize(ts + 2);
-            	break;
-            }
+
+    		holder.tankstelleDiesel.setTypeface(null, Typeface.BOLD);
+    		holder.tankstelleLDiesel.setTypeface(null,Typeface.BOLD);
+
+//			switch(intKraftstoff){
+//            case 3:
+//        	default:
+//        		holder.tankstelleDiesel.setTypeface(null, Typeface.BOLD);
+//        		holder.tankstelleLDiesel.setTypeface(null,Typeface.BOLD);
+//        		holder.tankstelleE5.setTypeface(null, Typeface.NORMAL);
+//        		holder.tankstelleLE5.setTypeface(null,Typeface.NORMAL);
+//        		holder.tankstelleE10.setTypeface(null, Typeface.NORMAL);
+//        		holder.tankstelleLE10.setTypeface(null,Typeface.NORMAL);
+//
+//            	break;
+//            case 1:
+//        		holder.tankstelleDiesel.setTypeface(null, Typeface.NORMAL);
+//        		holder.tankstelleLDiesel.setTypeface(null,Typeface.NORMAL);
+//        		holder.tankstelleE5.setTypeface(null, Typeface.BOLD);
+//        		holder.tankstelleLE5.setTypeface(null,Typeface.BOLD);
+//        		holder.tankstelleE10.setTypeface(null, Typeface.NORMAL);
+//        		holder.tankstelleLE10.setTypeface(null,Typeface.NORMAL);
+//
+//            	break;
+//            case 2:
+//        		holder.tankstelleDiesel.setTypeface(null, Typeface.NORMAL);
+//        		holder.tankstelleLDiesel.setTypeface(null,Typeface.NORMAL);
+//        		holder.tankstelleE5.setTypeface(null, Typeface.NORMAL);
+//        		holder.tankstelleLE5.setTypeface(null,Typeface.NORMAL);
+//        		holder.tankstelleE10.setTypeface(null, Typeface.BOLD);
+//        		holder.tankstelleLE10.setTypeface(null,Typeface.BOLD);
+//
+//            	break;
+//            }
             
             convertView.setTag(holder);
         } else {
@@ -134,19 +128,29 @@ public class CustomListAdapter extends BaseAdapter {
         		switch(Integer.parseInt(sp.getSorteId())){
         		// E5
         		case 1:
-        			holder.tankstelleE5.setText("" + sp.getPreis() + " €");
+        			holder.tankstelleLDiesel.setText("E5");
+        			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
+//        			holder.tankstelleE5.setText("" + sp.getPreis() + " €");
         			break;
         		// E10
         		case 2:
-        			holder.tankstelleE10.setText("" + sp.getPreis() + " €");
+        			holder.tankstelleLDiesel.setText("E10");
+        			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
+//        			holder.tankstelleE10.setText("" + sp.getPreis() + " €");
         			break;
         		// Diesel
         		case 3:
+        			holder.tankstelleLDiesel.setText("Diesel");
         			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
+//        			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
         			break;
         		default:
         			break;
         		}
+//        		holder.tankstelleLE5.setVisibility(0);
+//        		holder.tankstelleE5.setVisibility(0);
+//        		holder.tankstelleLE10.setVisibility(0);
+//        		holder.tankstelleE10.setVisibility(0);
         	}
         }
         return convertView;
@@ -158,12 +162,12 @@ public class CustomListAdapter extends BaseAdapter {
         TextView tankstellePlzOrt;
         TextView tankstelleEntfernung;
         TextView tankstelleDiesel;
-        TextView tankstelleE5;
-        TextView tankstelleE10;
+//        TextView tankstelleE5;
+//        TextView tankstelleE10;
         
         TextView tankstelleLDiesel;
-        TextView tankstelleLE5;
-        TextView tankstelleLE10;
+//        TextView tankstelleLE5;
+//        TextView tankstelleLE10;
         
     }
  

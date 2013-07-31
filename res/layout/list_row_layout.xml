@@ -54,7 +54,7 @@
         android:text="0.0€"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
+    <!-- TextView
         android:id="@+id/tvTe5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,9 +62,9 @@
         android:layout_alignBottom="@+id/tvTstrasseHausnr"
         android:layout_alignLeft="@+id/tvTdiesel"
         android:text="0.0€"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall" /-->
 
-    <TextView
+    <!-- TextView
         android:id="@+id/tvTe10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,18 +72,18 @@
         android:layout_alignBottom="@+id/tvTplzOrt"
         android:layout_alignLeft="@+id/tvTe5"
         android:text="0.0€"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall" /-->
 
-    <TextView
+    <!-- TextView
         android:id="@+id/tvLe5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvTe10"
         android:layout_alignLeft="@+id/tvLdiesel"
         android:text="E5"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall" /-->
 
-    <TextView
+    <!-- TextView
         android:id="@+id/tvLe10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,14 +91,14 @@
         android:layout_alignBottom="@+id/tvTe10"
         android:layout_alignLeft="@+id/tvLe5"
         android:text="E10"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall" /-->
 
     <TextView
         android:id="@+id/tvLdiesel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tvLe5"
-        android:layout_marginRight="15dp"
+        android:layout_above="@+id/tvTstrasseHausnr"
+        android:layout_marginRight="16dp"
         android:layout_toLeftOf="@+id/tvTdiesel"
         android:text="Diesel"
         android:textAppearance="?android:attr/textAppearanceSmall" />

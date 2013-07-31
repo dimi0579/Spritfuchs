@@ -49,8 +49,6 @@ public class VergleichActivity extends Activity implements  MyListener{
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
             	Intent intent = new Intent(VergleichActivity.this, VergleichActivityListDetail.class);
 				startActivity(intent);
-//            	TankstellenPosition tp = (TankstellenPosition) lv1.getItemAtPosition(position);
-//            	Toast.makeText(VergleichActivity.this, "Selected: " + tp.getTankstelleName(), Toast.LENGTH_LONG).show();
             }
  
         });
