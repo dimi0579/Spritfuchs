@@ -47,8 +47,12 @@ public class VergleichActivity extends Activity implements  MyListener{
  
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-            	Intent intent = new Intent(VergleichActivity.this, VergleichActivityListDetail.class);
-				startActivity(intent);
+            	TankstellenPosition tp = (TankstellenPosition)a.getItemAtPosition(position);
+            	if(tp != null){
+	            	Intent intent = new Intent(VergleichActivity.this, VergleichActivityListDetail.class);
+	            	intent.putExtra("tid", tp.getTankstelleId());
+					startActivity(intent);
+            	}
             }
  
         });
@@ -62,6 +66,7 @@ public class VergleichActivity extends Activity implements  MyListener{
      			// TODO: handle exception
      		}		
 	}
+		
 	public void setListView(ArrayList<TankstellenPosition> data){
 		if(data.size() > 0){
 			lv1.setAdapter(new CustomListAdapter(this, data));
@@ -294,7 +299,7 @@ public class VergleichActivity extends Activity implements  MyListener{
 		task.execute();
     }
 	@Override
-	public void setListDetailView(TankstellenPosition data) {
+	public void setListDetailView(ArrayList<TankstellenPosition> data) {
 		// TODO Auto-generated method stub
 		
 	}

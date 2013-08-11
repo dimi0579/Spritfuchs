@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.R;
 import com.dmitrij.doberstein.spritfuchs.SortePreis;
-import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 
 public class CustomListAdapter extends BaseAdapter {
 	 

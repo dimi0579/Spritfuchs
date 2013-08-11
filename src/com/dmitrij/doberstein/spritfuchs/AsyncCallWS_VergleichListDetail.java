@@ -54,7 +54,7 @@ public class AsyncCallWS_VergleichListDetail extends AsyncTask<Void, Void, Void>
     protected void onPostExecute(Void result) {
     	super.onPreExecute(); 
         try { 
-        	listener.setListDetailView(getListDetailData());
+        	listener.setListDetailView(null);
         	  progDialog.dismiss(); 
         }  
         catch (Exception e) { 

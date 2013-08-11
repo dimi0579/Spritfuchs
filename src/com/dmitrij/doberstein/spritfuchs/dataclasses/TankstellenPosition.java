@@ -2,6 +2,7 @@ package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
 import java.util.List;
 
+import com.dmitrij.doberstein.spritfuchs.Oeffnungszeiten;
 import com.dmitrij.doberstein.spritfuchs.SortePreis;
 
 public class TankstellenPosition {
@@ -21,7 +22,15 @@ public class TankstellenPosition {
 	private String tankstelleGemeldet;
 	
 	private List<SortePreis> tankstellePreise;
-		
+	
+	private Oeffnungszeiten tankstelleZeiten;
+
+	public Oeffnungszeiten getTankstelleZeiten() {
+		return tankstelleZeiten;
+	}
+	public void setTankstelleZeiten(Oeffnungszeiten tankstelleZeiten) {
+		this.tankstelleZeiten = tankstelleZeiten;
+	}
 	public List<SortePreis> getTankstellePreise() {
 		return tankstellePreise;
 	}
