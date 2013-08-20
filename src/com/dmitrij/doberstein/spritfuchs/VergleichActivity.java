@@ -1,9 +1,9 @@
 package com.dmitrij.doberstein.spritfuchs;
 
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
+//import java.util.Calendar;
+//import java.util.Locale;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
@@ -191,15 +191,15 @@ public class VergleichActivity extends Activity implements  MyListener{
         public void onLocationChanged(Location location) {
             locationManager.removeUpdates(networkLocationListener);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
-        	String datum = sdf.format(Calendar.getInstance().getTime());
-        	
-           String str = "New GPS location: \n"
-                    + String.format("%9.6f", location.getLatitude()) + ", "
-                    + String.format("%9.6f", location.getLongitude()) + "\n" + 
-                    datum;
-           
-           Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
+//        	String datum = sdf.format(Calendar.getInstance().getTime());
+//        	
+//           String str = "New GPS location: \n"
+//                    + String.format("%9.6f", location.getLatitude()) + ", "
+//                    + String.format("%9.6f", location.getLongitude()) + "\n" + 
+//                    datum;
+//           
+//           Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
            
            xlat = String.format("%9.6f", location.getLatitude());
            xlong = String.format("%9.6f", location.getLongitude());
@@ -236,15 +236,15 @@ public class VergleichActivity extends Activity implements  MyListener{
 
         @Override
         public void onLocationChanged(Location location) {        	
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
-        	String datum = sdf.format(Calendar.getInstance().getTime());
-        	
-            String str = "New network location: \n"
-                    + String.format("%9.9f", location.getLatitude()) + ", "
-                    + String.format("%9.9f", location.getLongitude()) + "\n" + 
-                    datum;
-            
-            Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
+//        	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
+//        	String datum = sdf.format(Calendar.getInstance().getTime());
+//        	
+//            String str = "New network location: \n"
+//                    + String.format("%9.9f", location.getLatitude()) + ", "
+//                    + String.format("%9.9f", location.getLongitude()) + "\n" + 
+//                    datum;
+//            
+//            Toast.makeText(VergleichActivity.this, str, Toast.LENGTH_LONG).show();
 
             xlat = String.format("%9.6f", location.getLatitude());
             xlong = String.format("%9.6f", location.getLongitude());

@@ -1,9 +1,8 @@
 package com.dmitrij.doberstein.spritfuchs;
 
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+//import java.text.SimpleDateFormat;
+//import java.util.Calendar;
+//import java.util.Locale;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 
@@ -22,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivityMenu extends Activity {
@@ -191,9 +189,9 @@ public class MainActivityMenu extends Activity {
         public void onLocationChanged(Location location) {
             locationManager.removeUpdates(networkLocationListener);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
-        	String datum = sdf.format(Calendar.getInstance().getTime());
-        	
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
+//        	String datum = sdf.format(Calendar.getInstance().getTime());
+//        	
 //            textView.setText("New GPS location: \n"
 //                    + String.format("%9.6f", location.getLatitude()) + ", "
 //                    + String.format("%9.6f", location.getLongitude()) + "\n" + 
@@ -233,9 +231,9 @@ public class MainActivityMenu extends Activity {
 
         @Override
         public void onLocationChanged(Location location) {        	
-        	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
-        	String datum = sdf.format(Calendar.getInstance().getTime());
-        	
+//        	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
+//        	String datum = sdf.format(Calendar.getInstance().getTime());
+//        	
 //            textView.setText("New network location: \n"
 //                    + String.format("%9.9f", location.getLatitude()) + ", "
 //                    + String.format("%9.9f", location.getLongitude()) + "\n" + 

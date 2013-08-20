@@ -16,14 +16,14 @@
         <item name="2">10</item>
         <item name="3">25</item>
         <item name="4">50</item>
-        <item name="5">100</item>        
+        <item name="5">1000</item>        
     </string-array>
     <string-array name="sUmkreisValues">
         <item name="1">5</item>
         <item name="2">10</item>
         <item name="3">25</item>
         <item name="4">50</item>
-        <item name="5">100</item>
+        <item name="5">1000</item>
     </string-array>
      
 </resources>
