@@ -8,6 +8,7 @@ import java.util.Locale;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivityMenu extends Activity {
@@ -32,8 +34,10 @@ public class MainActivityMenu extends Activity {
 	Button btnInfo;
 	Button btnConf;
 	
-	TextView textView;
+//	TextView textView;
 	LocationManager locationManager;
+	
+	private ProgressDialog progDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,9 @@ public class MainActivityMenu extends Activity {
 		btnInfo = (Button)findViewById(R.id.btnInfo);
 		btnConf = (Button)findViewById(R.id.btnConf);
 		
-		textView = (TextView)findViewById(R.id.textView1);
+//		textView = (TextView)findViewById(R.id.textView1);
+		
+		progDialog = ProgressDialog.show(this, "Info", "Einen Moment bitte...", true, true);
 		
 //		showUserSettings();
 		
@@ -188,11 +194,12 @@ public class MainActivityMenu extends Activity {
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
         	String datum = sdf.format(Calendar.getInstance().getTime());
         	
-            textView.setText("New GPS location: \n"
-                    + String.format("%9.6f", location.getLatitude()) + ", "
-                    + String.format("%9.6f", location.getLongitude()) + "\n" + 
-                    datum);
+//            textView.setText("New GPS location: \n"
+//                    + String.format("%9.6f", location.getLatitude()) + ", "
+//                    + String.format("%9.6f", location.getLongitude()) + "\n" + 
+//                    datum);
 
+            progDialog.dismiss(); 
         }
     };
 
@@ -229,11 +236,12 @@ public class MainActivityMenu extends Activity {
         	SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
         	String datum = sdf.format(Calendar.getInstance().getTime());
         	
-            textView.setText("New network location: \n"
-                    + String.format("%9.9f", location.getLatitude()) + ", "
-                    + String.format("%9.9f", location.getLongitude()) + "\n" + 
-                    datum);
-
+//            textView.setText("New network location: \n"
+//                    + String.format("%9.9f", location.getLatitude()) + ", "
+//                    + String.format("%9.9f", location.getLongitude()) + "\n" + 
+//                    datum);
+        	
+        	progDialog.dismiss(); 
         }
     };
 }

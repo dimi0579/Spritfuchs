@@ -1,42 +1,112 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="#E8E8E8"
+    >
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 	<RelativeLayout 
         android:id="@+id/LinearLayout01"
         android:orientation="horizontal" 
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <Button 
-            android:id="@+id/btnVergleich"
-	        android:layout_width="100dp"
-	        android:layout_height="wrap_content" 
-	        android:text="Vergleich" 
-	        android:onClick="onClick"
-	        android:layout_alignParentLeft="true"/>
-	    <Button 
-	        android:id="@+id/btnInfo"
-	        android:layout_width="100dp"
-	        android:layout_height="wrap_content" 
-	        android:text="Info"
-	        android:onClick="onClick"
-	        android:layout_centerInParent="true"/>
-	    <Button 
-	        android:id="@+id/btnConf"
-	        android:layout_width="100dp"
-	        android:layout_height="wrap_content"
-	        android:text="Conf" 
-	        android:onClick="onClick"
-	        android:layout_alignParentRight="true"/>
-    </RelativeLayout>
+        android:layout_height="fill_parent"
+        >
 
 
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+	    >
+
+	    <TableRow
+	        android:id="@+id/tableRow1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="68dp" >
+
+	        <Button
+	            android:id="@+id/btnVergleich"
+	            android:layout_width="48dp"
+	            android:layout_height="48dp"
+	            android:background="@drawable/iconvergleich48"
+	            android:onClick="onClick"
+	            android:layout_marginLeft="20dp"
+	            android:typeface="sans" />
+
+	        <TextView
+	            android:id="@+id/textView2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Vergleich"
+	            android:layout_marginLeft="20dp"
+	            android:textSize="22dp"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    </TableRow>
+
+	    <TableRow
+	        android:id="@+id/tableRow2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="68dp" >
+
+	        <Button
+	            android:id="@+id/btnInfo"
+	            android:layout_width="48dp"
+	            android:layout_height="48dp"
+	            android:background="@drawable/iconinfo48"
+	            android:onClick="onClick" 
+	            
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginTop="50dp"
+	            />
+
+	        <TextView
+	            android:id="@+id/textView3"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Imressum"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginTop="50dp"
+	            android:textSize="22dp"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    </TableRow>
+
+	    <TableRow
+	        android:id="@+id/tableRow3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="68dp" >
+
+	        <Button
+	            android:id="@+id/btnConf"
+	            android:layout_width="48dp"
+	            android:layout_height="48dp"
+	            android:background="@drawable/iconsettings48"
+	            android:onClick="onClick"
+	            
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginTop="50dp"
+	            />
+
+	        <TextView
+	            android:id="@+id/textView4"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Settings"
+	            android:layout_marginLeft="20dp"
+	            android:layout_marginTop="50dp"
+	            android:textSize="22dp"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    </TableRow>
+	</TableLayout>
+</RelativeLayout>
 </LinearLayout>
