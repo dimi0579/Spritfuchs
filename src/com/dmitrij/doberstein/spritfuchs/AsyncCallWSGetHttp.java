@@ -163,6 +163,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 	  }
 	  else if(VALD.equalsIgnoreCase(myActivity.getClass().getName())){
 		  URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLENPOSITION&tid=" + this.tid;
+		  URL = "http://192.168.178.20:8080/backend/rest/query";
 	  }
       
       
@@ -177,6 +178,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
            
            // extrahiere xml aus dem response
            returnString = Utils.extracXml(returnString);
+           
        }
      catch(Exception ex)
         {

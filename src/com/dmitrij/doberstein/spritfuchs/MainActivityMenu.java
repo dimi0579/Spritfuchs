@@ -6,6 +6,8 @@ package com.dmitrij.doberstein.spritfuchs;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -23,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivityMenu extends Activity {
 	public static String kraftstoff = "";
 	public static String umkreis = "";
@@ -33,9 +37,9 @@ public class MainActivityMenu extends Activity {
 	Button btnConf;
 	
 //	TextView textView;
-	LocationManager locationManager;
+	public static LocationManager locationManager;
 	
-	private ProgressDialog progDialog;
+	private static ProgressDialog progDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +68,13 @@ public class MainActivityMenu extends Activity {
 //			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this.locationListener);
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}		
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		//getMenuInflater().inflate(R.menu.main, menu);
-		getMenuInflater().inflate(R.menu.settings, menu);
+//		getMenuInflater().inflate(R.menu.settings, menu);
         return true;
 	} 
     @Override
@@ -117,7 +119,6 @@ public class MainActivityMenu extends Activity {
  
         settingsTextView.setText(builder.toString());
     }
-    
 	public void onClick(View v){
 		Intent intent = null;
 		switch (v.getId()) {
@@ -141,15 +142,13 @@ public class MainActivityMenu extends Activity {
 				break;
 		}
 	}
-
     @Override
     protected void onResume() {
         super.onResume();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 6000, 1, networkLocationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 1, gpsLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, networkLocationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
     }
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -158,7 +157,7 @@ public class MainActivityMenu extends Activity {
         locationManager.removeUpdates(gpsLocationListener);
     }
 
-	private final LocationListener gpsLocationListener = new LocationListener() {
+	public static final LocationListener gpsLocationListener = new LocationListener() {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -201,7 +200,7 @@ public class MainActivityMenu extends Activity {
         }
     };
 
-    private final LocationListener networkLocationListener = new LocationListener() {
+    public static final LocationListener networkLocationListener = new LocationListener() {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 //import java.util.Calendar;
 //import java.util.Locale;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,12 +17,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 //import android.widget.Toast;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
@@ -28,9 +35,12 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class VergleichActivity extends Activity implements  MyListener{
+	private static final int RESULT_SETTINGS = 1;	
+	
 	private ListView lv1;
-	LocationManager locationManager;
+//	LocationManager locationManager;
 	
 	private String xlat = "";
 	private String xlong = "";
@@ -40,6 +50,11 @@ public class VergleichActivity extends Activity implements  MyListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_vergleich);
 
+
+		ActionBar ab = getActionBar();
+		ab.setDisplayHomeAsUpEnabled(true);
+		
+		
         lv1 = (ListView) findViewById(R.id.list_tankstellen);
 //        lv1.setAdapter(new CustomListAdapter(this, image_details));
         
@@ -59,17 +74,18 @@ public class VergleichActivity extends Activity implements  MyListener{
         
      // gps location
      		try {
-     			locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+     			MainActivityMenu.locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //     			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this.locationListener);
 
      		} catch (Exception e) {
-     			// TODO: handle exception
+     			
      		}		
 	}
 		
 	public void setListView(ArrayList<TankstellenPosition> data){
-		if(data.size() > 0){
-			lv1.setAdapter(new CustomListAdapter(this, data));
+		if(data.size() == 0){
+			lv1.setAdapter(new CustomListAdapter(this, getListData())); // -- test
+//			lv1.setAdapter(new CustomListAdapter(this, data)); -- original
 		}
 		else{
 			new AlertDialog.Builder(this)
@@ -140,18 +156,18 @@ public class VergleichActivity extends Activity implements  MyListener{
 //		ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
 //		root.addView(progressBar);
 		//******************************************************************************************************
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 45000, 50, networkLocationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 50, gpsLocationListener);
+//		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 45000, 50, networkLocationListener);
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 50, gpsLocationListener);
         
         Location loc = null;
-        if(locationManager.getProvider(LocationManager.GPS_PROVIDER) != null){
-        	loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(MainActivityMenu.locationManager.getProvider(LocationManager.GPS_PROVIDER) != null){
+        	loc = MainActivityMenu.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         	xlat = String.format("%9.6f", loc.getLatitude());
             xlong = String.format("%9.6f", loc.getLongitude());
         }
-        else if(locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null){
-        	loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        else if(MainActivityMenu.locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null){
+        	loc = MainActivityMenu.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         	xlat = String.format("%9.6f", loc.getLatitude());
             xlong = String.format("%9.6f", loc.getLongitude());
         }
@@ -189,7 +205,7 @@ public class VergleichActivity extends Activity implements  MyListener{
 
         @Override
         public void onLocationChanged(Location location) {
-            locationManager.removeUpdates(networkLocationListener);
+        	MainActivityMenu.locationManager.removeUpdates(networkLocationListener);
 
 //            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss", Locale.GERMAN);
 //        	String datum = sdf.format(Calendar.getInstance().getTime());
@@ -255,16 +271,16 @@ public class VergleichActivity extends Activity implements  MyListener{
     protected void onResume() {
         super.onResume();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 45000, 50, networkLocationListener);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 50, gpsLocationListener);
+        MainActivityMenu.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 45000, 50, networkLocationListener);
+        MainActivityMenu.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 45000, 50, gpsLocationListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        locationManager.removeUpdates(networkLocationListener);
-        locationManager.removeUpdates(gpsLocationListener);
+        MainActivityMenu.locationManager.removeUpdates(networkLocationListener);
+        MainActivityMenu.locationManager.removeUpdates(gpsLocationListener);
     }
     
     public void getData(){
@@ -303,4 +319,26 @@ public class VergleichActivity extends Activity implements  MyListener{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	  public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.settings, menu);
+	    return true;
+	  } 
+	@Override
+	  public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case R.id.menu_settings:
+	    	Intent i = new Intent(this, SettingsActivity.class);
+            startActivityForResult(i, RESULT_SETTINGS);
+	      break;
+	    case android.R.id.home:
+	    	onBackPressed();
+	    	break;
+	    default:
+	      break;
+	    }
+
+	    return true;
+	  } 
 }

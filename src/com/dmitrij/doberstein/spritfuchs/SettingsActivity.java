@@ -1,7 +1,11 @@
 package com.dmitrij.doberstein.spritfuchs;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.view.MenuItem;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -14,6 +18,7 @@ import android.preference.PreferenceActivity;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SettingsActivity extends PreferenceActivity {
 	@SuppressWarnings("deprecation")
 	@Override
@@ -21,6 +26,22 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
  
         addPreferencesFromResource(R.xml.settings);
- 
+
+		
+		ActionBar ab = getActionBar();
+		ab.setDisplayHomeAsUpEnabled(true);
     }
+
+	@Override
+	  public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case android.R.id.home:
+	    	onBackPressed();
+	    	break;
+	    default:
+	      break;
+	    }
+
+	    return true;
+	  } 
 }
