@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <ImageView
+        android:id="@+id/ivMarke"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/tankstelle24" />
+
+    <TextView
+        android:id="@+id/tvTName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/ivMarke"
+        android:text="Aral Überlingen"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvTAdresse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivMarke"
+        android:layout_below="@+id/ivMarke"
+        android:layout_marginTop="5dp"
+        android:text="Test Strasse 6c\n88662 Überlingen"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/ibNavigation"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvTAdresse"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_menu_compass" 
+        android:background="@android:color/transparent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/ibNavigation"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvTPreis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="€ 1,559"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvTSpritTimeEntf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Diesel\n05:49:45\n8.4 km"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>

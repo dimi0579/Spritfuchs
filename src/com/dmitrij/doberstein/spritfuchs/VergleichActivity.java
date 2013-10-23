@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 
@@ -84,7 +85,8 @@ public class VergleichActivity extends Activity implements  MyListener{
 		
 	public void setListView(ArrayList<TankstellenPosition> data){
 		if(data.size() == 0){
-			lv1.setAdapter(new CustomListAdapter(this, getListData())); // -- test
+			lv1.setAdapter(new CustomListAdapterNew(this, getListData())); // -- new Adaprter test
+//			lv1.setAdapter(new CustomListAdapter(this, getListData())); // -- old Adaprter test
 //			lv1.setAdapter(new CustomListAdapter(this, data)); -- original
 		}
 		else{

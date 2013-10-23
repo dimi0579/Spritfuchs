@@ -2,6 +2,7 @@ package com.dmitrij.doberstein.spritfuchs;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -26,8 +27,11 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
  
         addPreferencesFromResource(R.xml.settings);
-
+        findViewById(android.R.id.list).setBackgroundColor(Color.parseColor("#CAE1FF"));
+        
 		
+        
+        
 		ActionBar ab = getActionBar();
 		ab.setDisplayHomeAsUpEnabled(true);
     }
