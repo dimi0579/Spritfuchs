@@ -1,31 +1,39 @@
 package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dmitrij.doberstein.spritfuchs.MainActivityMenu;
 import com.dmitrij.doberstein.spritfuchs.R;
 import com.dmitrij.doberstein.spritfuchs.SortePreis;
+import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 
 public class CustomListAdapterNew extends BaseAdapter {
 	 
-    private ArrayList<TankstellenPosition> listData;
+    private ArrayList<StationItem> listData;
  
     private LayoutInflater layoutInflater;
     
     private Context cont;
- 
-    public CustomListAdapterNew(Context context, ArrayList<TankstellenPosition> listData) {
+
+    public CustomListAdapterNew(Context context, ArrayList<StationItem> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(context);
         cont = context;
@@ -46,6 +54,27 @@ public class CustomListAdapterNew extends BaseAdapter {
         return position;
     }
  
+    private FuelSort getFuelSortFromSettings(){
+    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.cont);
+        String strKraftstoff = prefs.getString("prefKraftstoff", "1");
+        int intKraftstoff = 1;
+        try {
+			intKraftstoff = Integer.parseInt(strKraftstoff);
+		} 
+        catch (Exception e) {
+		}
+        
+        if(intKraftstoff == 3){
+        	return FuelSort.DIESEL;
+        }
+        else if(intKraftstoff == 2){
+        	return FuelSort.E10;
+        }
+        else{
+        	return FuelSort.E5;
+        }
+    }
+    
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -54,90 +83,114 @@ public class CustomListAdapterNew extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.list_row_layout_new, null);
             
             holder = new ViewHolder();
-            try {
-				holder.ivMarke = (ImageView) convertView.findViewById(R.id.ivMarke);
-				holder.tvTName = (TextView) convertView.findViewById(R.id.tvTName);
-				holder.tvTAdresse = (TextView) convertView.findViewById(R.id.tvTAdresse);
-				holder.tvTPreis = (TextView) convertView.findViewById(R.id.tvTPreis);
-				holder.tvTSpritTimeEntf = (TextView) convertView.findViewById(R.id.tvTSpritTimeEntf);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-            
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.cont);
-            String strKraftstoff = prefs.getString("prefKraftstoff", "1");
-            int intKraftstoff = 1;
-            try {
-				intKraftstoff = Integer.parseInt(strKraftstoff);
-			} 
-            catch (Exception e) {
-			}
-            
+            holder.ivMarke = (ImageView) convertView.findViewById(R.id.ivMarke);
+            holder.tvTName = (TextView) convertView.findViewById(R.id.tvTName);
+            holder.tvTAdresse = (TextView) convertView.findViewById(R.id.tvTAdresse);
+            holder.tvTPreis = (TextView) convertView.findViewById(R.id.tvTPreis);
+            holder.tvTSpritTimeEntf = (TextView) convertView.findViewById(R.id.tvTSpritTimeEntf);
+            holder.ibNavigation = (ImageButton) convertView.findViewById(R.id.ibNavigation);
 
-//    		holder.tankstelleDiesel.setTypeface(null, Typeface.BOLD);
-//    		holder.tankstelleLDiesel.setTypeface(null,Typeface.BOLD);          
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        StationItem tp = (StationItem)listData.get(position);
         
-//    	ImageView ivMarke;
-//        TextView tvTName;
-//        TextView tvTAdresse;
-//        TextView tvTPreis;
-//        TextView tvTSpritTimeEntf;
-        
-        
-        TankstellenPosition tp = (TankstellenPosition)listData.get(position);
-//        holder.ivMarke
         // Tankstellenname
-        holder.tvTName.setText(tp.getTankstelleName());
+        holder.tvTName.setText(tp.getName());
         // Tankstellenadresse
-        String adresse = tp.getTankstelleStrasse() + " " + tp.getTankstelleHausnr() + "\n" + 
-        		tp.getTankstellePlz() + " " + tp.getTankstelleOrt();
+        String adresse = tp.getStreet() + " " + tp.getHouseNumber() + "\n" + 
+        		tp.getCityCode() + " " + tp.getCity();
         holder.tvTAdresse.setText(adresse);
         
+        // Marke
+        switch(tp.getMark()){
+	    	case AGIP:
+	    		holder.ivMarke.setImageResource(R.drawable.agip24);
+	    		break;
+	    	case ARAL:
+	    		holder.ivMarke.setImageResource(R.drawable.aral24);
+	    		break;
+	    	case AVIA:
+	    		holder.ivMarke.setImageResource(R.drawable.avia24);
+	    		break;
+	    	case BP:
+	    		holder.ivMarke.setImageResource(R.drawable.bp24);
+	    		break;
+	    	case ESSO:
+	    		holder.ivMarke.setImageResource(R.drawable.esso24);
+	    		break;
+	    	case JET:
+	    		holder.ivMarke.setImageResource(R.drawable.jet24);
+	    		break;
+	    	case OMV:
+	    		holder.ivMarke.setImageResource(R.drawable.omv24);
+	    		break;
+	    	default:
+	    		holder.ivMarke.setImageResource(R.drawable.tankstelle24);
+	    		break;
+        }
+        
         // Preis
-        String sorteTimeEntf = "";
-        List<SortePreis> asp = tp.getTankstellePreise();
+        String fuelsort = "";
+        String timestamp = "";
+        String dist = "";
+        
+        List<Price> asp = tp.getPrices();
         if(asp != null){
         	for(int i = 0; i < asp.size(); i++){
-        		SortePreis sp = asp.get(i);
-        		switch(Integer.parseInt(sp.getSorteId())){
+        		Price sp = asp.get(i);
+        		switch(getFuelSortFromSettings()){
         		// E5
-        		case 1:
-        			sorteTimeEntf += "E5\n";
-//        			holder.tankstelleLDiesel.setText("E5");
-//        			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
+        		case E5:
+        			fuelsort = "E5";
         			break;
         		// E10
-        		case 2:
-        			sorteTimeEntf += "E10\n";
-//        			holder.tankstelleLDiesel.setText("E10");
-//        			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
+        		case E10:
+        			fuelsort = "E10";
         			break;
         		// Diesel
-        		case 3:
-        			sorteTimeEntf += "Diesel\n";
-//        			holder.tankstelleLDiesel.setText("Diesel");
-//        			holder.tankstelleDiesel.setText("" + sp.getPreis() + " €");
+        		case DIESEL:
+        			fuelsort = "Diesel";
         			break;
         		default:
         			break;
         		}
         		// TImestamp
-//        		sorteTimeEntf += sp.getPreisTimestamp(); - dies muss noch hinzugehügt werden...
-        		sorteTimeEntf += "99:99:99\n";
+        		long ts = sp.getTimestamp();
+        		Calendar cal = Calendar.getInstance();
+        		cal.setTimeInMillis(ts * 1000);
+        		
+        		String stunden = (cal.get(Calendar.HOUR)) < 10 ? "0" + cal.get(Calendar.HOUR) : "" + cal.get(Calendar.HOUR);
+        		String minuten = (cal.get(Calendar.MINUTE)) < 10 ? "0" + cal.get(Calendar.MINUTE) : "" + cal.get(Calendar.MINUTE);
+        		String sekunden = (cal.get(Calendar.SECOND)) < 10 ? "0" + cal.get(Calendar.SECOND) : "" + cal.get(Calendar.SECOND);
+        		
+        		timestamp = stunden + ":" +
+        				minuten + ":" + 
+        				sekunden + "\n";
+        		
         		// Entfernung
-        		sorteTimeEntf += tp.getTankstelleEntfernung();
+        		double distanz = tp.getDestination();
+//        		sorteTimeEntf += (distanz < 1.00) ? distanz + " m" : distanz + " km";
+        		dist = (distanz < 1.00) ? distanz + " m" : distanz + " km";
+        		
         		// Preis
-    			holder.tvTPreis.setText(sp.getPreis());
+        		String preis = "€ " + sp.getPrice();
+    			holder.tvTPreis.setText(preis);
+    			break;
         	}
         }
         // SpritTimeEntf
-        holder.tvTSpritTimeEntf.setText(sorteTimeEntf);
+        Spanned sd = Html.fromHtml("<b><big>" + fuelsort + "</big></b>" +  "<br />" + 
+                timestamp + "<br />" + dist);
+        holder.tvTSpritTimeEntf.setText(sd);
+        
+        // setze navigationsdaten
+        NavigateData nd = new NavigateData(0.0, 0.0, 
+        		tp.getLatitude(), tp.getLongtitude());
+        holder.ibNavigation.setTag(nd);
+        
         return convertView;
     }
  
@@ -147,6 +200,8 @@ public class CustomListAdapterNew extends BaseAdapter {
         TextView tvTAdresse;
         TextView tvTPreis;
         TextView tvTSpritTimeEntf;
+        
+        ImageButton ibNavigation;
         
     }
  

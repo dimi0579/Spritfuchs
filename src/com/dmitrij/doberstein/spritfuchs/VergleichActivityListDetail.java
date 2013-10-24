@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 
@@ -30,23 +31,23 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 	private TextView tvOZTag;
 	private TextView tvOZVonBis;
 	private String tid = "";
+	
+	private StationItem si;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		try {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_vergleich_activity_list_detail);
 
-
 			ActionBar ab = getActionBar();
 			ab.setDisplayHomeAsUpEnabled(true);
-			
-			
+
 			tvTankstelleDetail = (TextView) findViewById(R.id.tvTankstelleDetail);
 			tvOZTag = (TextView) findViewById(R.id.tvOZTag);
 			tvOZVonBis = (TextView) findViewById(R.id.tvOZVonBis);
-			
-			tid = getIntent().getStringExtra("tid");
-			if(tid == null || tid.isEmpty()){
+
+			si = (StationItem)this.getIntent().getSerializableExtra("stationitem");
+			if(si == null){
 				new AlertDialog.Builder(this)
 			    .setTitle("Error")
 			    .setMessage("Actually are no data available!")
@@ -57,6 +58,22 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 			     })
 			     .show();
 			}
+			else{
+				
+			}
+			
+//			tid = getIntent().getStringExtra("tid");
+//			if(tid == null || tid.isEmpty()){
+//				new AlertDialog.Builder(this)
+//			    .setTitle("Error")
+//			    .setMessage("Actually are no data available!")
+//			    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//			        public void onClick(DialogInterface dialog, int which) { 
+//			            VergleichActivityListDetail.this.finish();
+//			        }
+//			     })
+//			     .show();
+//			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,7 +151,7 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 	protected void onStart(){
 		super.onStart();
 
-		this.getData();
+//		this.getData();
 	}
 
 	@Override

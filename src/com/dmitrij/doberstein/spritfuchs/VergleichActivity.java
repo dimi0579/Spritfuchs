@@ -2,6 +2,8 @@ package com.dmitrij.doberstein.spritfuchs;
 
 //import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 //import java.util.Calendar;
 //import java.util.Locale;
 
@@ -9,6 +11,7 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,9 +20,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,6 +38,13 @@ import android.widget.Toast;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapterNew;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Openingtime;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 
@@ -63,10 +75,12 @@ public class VergleichActivity extends Activity implements  MyListener{
  
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-            	TankstellenPosition tp = (TankstellenPosition)a.getItemAtPosition(position);
+//            	TankstellenPosition tp = (TankstellenPosition)a.getItemAtPosition(position);
+            	StationItem tp = (StationItem)a.getItemAtPosition(position);
             	if(tp != null){
 	            	Intent intent = new Intent(VergleichActivity.this, VergleichActivityListDetail.class);
-	            	intent.putExtra("tid", tp.getTankstelleId());
+	            	intent.putExtra("stationitem", tp);
+
 					startActivity(intent);
             	}
             }
@@ -101,48 +115,104 @@ public class VergleichActivity extends Activity implements  MyListener{
 		     .show();
 		}
 	}
-	@SuppressWarnings("unused")
-	private ArrayList<TankstellenPosition> getListData() {
-        ArrayList<TankstellenPosition> results = new ArrayList<TankstellenPosition>();
-        
-        TankstellenPosition tp = new TankstellenPosition();
-        tp.setTankstelleName("Test1");
-        tp.setTankstelleStrasse("teststr.");
-        tp.setTankstelleHausnr("1");
-        tp.setTankstellePlz("11111");
-        tp.setTankstelleOrt("testort 1");
-        tp.setTankstelleEntfernung("111");
-        tp.setTankstelleDiesel("1,30");
-        tp.setTankstelleE5("1,50");
-        tp.setTankstelleE10("1,60");
-        results.add(tp);
+	
+	private ArrayList<StationItem> getListData(){
+		ArrayList<StationItem> ret = new ArrayList<StationItem>();
+		
+		List<Openingtime> openingTimes = new ArrayList<Openingtime>();
+		Openingtime ptMO = new Openingtime(Day.MONDAY, "00:00", "23:59");
+		openingTimes.add(ptMO);
+		Openingtime ptDI = new Openingtime(Day.TUESDAY, "00:00", "23:59");
+		openingTimes.add(ptDI);
+		Openingtime ptMI = new Openingtime(Day.WEDNESDAY, "00:00", "23:59");
+		openingTimes.add(ptMI);
+		Openingtime ptDO = new Openingtime(Day.THURSDAY, "00:00", "23:59");
+		openingTimes.add(ptDO);
+		Openingtime ptFR = new Openingtime(Day.FRIDAY, "00:00", "23:59");
+		openingTimes.add(ptFR);
+		Openingtime ptSA = new Openingtime(Day.SATURDAY, "00:00", "23:59");
+		openingTimes.add(ptSA);
+		Openingtime ptSO = new Openingtime(Day.SUNDAY, "00:00", "23:59");
+		openingTimes.add(ptSO);
+		Openingtime ptFE = new Openingtime(Day.HOLLIDAY, "00:00", "23:59");
+		openingTimes.add(ptFE);
+		
+		List<Price> prices = new ArrayList<Price>();
+		Price price = new Price(FuelSort.E5, 1.345, new Date().getTime());
+		prices.add(price);
+		price = new Price(FuelSort.E10, 1.345, new Date().getTime());
+		prices.add(price);
+		price = new Price(FuelSort.DIESEL, 1.345, new Date().getTime());
+		prices.add(price);
+		
+		StationItem si = new StationItem(openingTimes, "1", "AGIP Überlingen", StationBrand.AGIP, 
+				"NussdorferStr.", "1", "Überlingen", 88662, 47.766175, 9.170277, 0.5, prices);
+		ret.add(si);
+		
+		si = new StationItem(openingTimes, "1", "ARAL Meersburg", StationBrand.ARAL, 
+				"NussdorferStr.", "1", "Meersburg", 88662, 47.696957, 9.272724, (double)12, prices);
+		ret.add(si);
+		
+		si = new StationItem(openingTimes, "1", "AVIA Stockach", StationBrand.AVIA, 
+				"NussdorferStr.", "1", "Stockach", 88662, 47.853164, 9.009153, (double)9.5, prices);
+		ret.add(si);
+		
+		si = new StationItem(openingTimes, "1", "BP Singen", StationBrand.BP, 
+				"NussdorferStr.", "1", "Singen", 88662, 47.764064, 8.853396, (double)23.6, prices);
+		ret.add(si);
+		
+		si = new StationItem(openingTimes, "1", "TEST Konstanz", StationBrand.DEFAULT, 
+				"NussdorferStr.", "1", "Konstanz", 88662, 47.677950, 9.173238, (double)32.2, prices);
+		ret.add(si);
 
-        tp = new TankstellenPosition();
-        tp.setTankstelleName("Test2");
-        tp.setTankstelleStrasse("teststr.");
-        tp.setTankstelleHausnr("2");
-        tp.setTankstellePlz("22222");
-        tp.setTankstelleOrt("testort 2");
-        tp.setTankstelleEntfernung("222");
-        tp.setTankstelleDiesel("1,33");
-        tp.setTankstelleE5("1,53");
-        tp.setTankstelleE10("1,63");
-        results.add(tp);
-
-        tp = new TankstellenPosition();
-        tp.setTankstelleName("Test3");
-        tp.setTankstelleStrasse("teststr.");
-        tp.setTankstelleHausnr("3");
-        tp.setTankstellePlz("333");
-        tp.setTankstelleOrt("testort 3");
-        tp.setTankstelleEntfernung("333");
-        tp.setTankstelleDiesel("1,36");
-        tp.setTankstelleE5("1,56");
-        tp.setTankstelleE10("1,66");
-        results.add(tp);
-        
-        return results;
+//		StationItem(List<Openingtime> openingTimes, String id, String name,
+//				String mark, String street, int houseNumber, String city,
+//				int cityCode, double latitude, double longtitude, long destination,
+//				Price price)
+		return ret;
 	}
+	@SuppressWarnings("unused")
+//	private ArrayList<TankstellenPosition> getListData() {
+//        ArrayList<TankstellenPosition> results = new ArrayList<TankstellenPosition>();
+//        
+//        TankstellenPosition tp = new TankstellenPosition();
+//        tp.setTankstelleName("Test1");
+//        tp.setTankstelleStrasse("teststr.");
+//        tp.setTankstelleHausnr("1");
+//        tp.setTankstellePlz("11111");
+//        tp.setTankstelleOrt("testort 1");
+//        tp.setTankstelleEntfernung("111");
+//        tp.setTankstelleDiesel("1,30");
+//        tp.setTankstelleE5("1,50");
+//        tp.setTankstelleE10("1,60");
+//        results.add(tp);
+//
+//        tp = new TankstellenPosition();
+//        tp.setTankstelleName("Test2");
+//        tp.setTankstelleStrasse("teststr.");
+//        tp.setTankstelleHausnr("2");
+//        tp.setTankstellePlz("22222");
+//        tp.setTankstelleOrt("testort 2");
+//        tp.setTankstelleEntfernung("222");
+//        tp.setTankstelleDiesel("1,33");
+//        tp.setTankstelleE5("1,53");
+//        tp.setTankstelleE10("1,63");
+//        results.add(tp);
+//
+//        tp = new TankstellenPosition();
+//        tp.setTankstelleName("Test3");
+//        tp.setTankstelleStrasse("teststr.");
+//        tp.setTankstelleHausnr("3");
+//        tp.setTankstellePlz("333");
+//        tp.setTankstelleOrt("testort 3");
+//        tp.setTankstelleEntfernung("333");
+//        tp.setTankstelleDiesel("1,36");
+//        tp.setTankstelleE5("1,56");
+//        tp.setTankstelleE10("1,66");
+//        results.add(tp);
+//        
+//        return results;
+//	}
 	
 	@Override
 	protected void onStart(){
@@ -343,4 +413,24 @@ public class VergleichActivity extends Activity implements  MyListener{
 
 	    return true;
 	  } 
+	
+	public void navigateOnClickHandler(View v) {
+        Location loc = null;
+        if(MainActivityMenu.locationManager.getProvider(LocationManager.GPS_PROVIDER) != null){
+        	loc = MainActivityMenu.locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+        else if(MainActivityMenu.locationManager.getProvider(LocationManager.NETWORK_PROVIDER) != null){
+        	loc = MainActivityMenu.locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        
+        NavigateData nd = (NavigateData) v.getTag();
+        
+    	Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+    			Uri.parse("http://maps.google.com/maps?saddr=" + loc.getLatitude() + 
+    					","+ loc.getLongitude() + "&daddr=" + nd.getDestLatitude() + 
+    					"," + nd.getDestLongtitude()));
+    	startActivity(intent);
+	}
+
+
 }
