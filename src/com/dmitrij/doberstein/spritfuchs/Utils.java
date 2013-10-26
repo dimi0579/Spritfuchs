@@ -13,6 +13,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 public class Utils {
@@ -221,5 +223,111 @@ public class Utils {
 		Node node = (Node) nodes.item(0);
 		return node.getNodeValue();
 	}
+	public static int getTankstellenImage(StationBrand marke){
+		int ret = 0;
+		switch(marke){
+		case AGIP:
+			ret = R.drawable.agip64;
+			break;
+		case ARAL:
+			ret = R.drawable.aral64;
+			break;
+		case AVIA:
+			ret = R.drawable.avia64;
+			break;
+		case BP:
+			ret = R.drawable.bp64;
+			break;
+		case ESSO:
+			ret = R.drawable.esso64;
+			break;
+		case JET:
+			ret = R.drawable.jet64;
+			break;
+		case OMV:
+			ret = R.drawable.omv64;
+			break;
+		case SHELL:
+			ret = R.drawable.shell64;
+			break;
+		default:
+			ret = R.drawable.tankstelle64;
+			break;
+		}
+		return ret;
+	}
+	public static int getTankstellenImageSmall(StationBrand marke){
+		int ret = 0;
+		switch(marke){
+		case AGIP:
+			ret = R.drawable.agip24;
+			break;
+		case ARAL:
+			ret = R.drawable.aral24;
+			break;
+		case AVIA:
+			ret = R.drawable.avia24;
+			break;
+		case BP:
+			ret = R.drawable.bp24;
+			break;
+		case ESSO:
+			ret = R.drawable.esso24;
+			break;
+		case JET:
+			ret = R.drawable.jet24;
+			break;
+		case OMV:
+			ret = R.drawable.omv24;
+			break;
+		case SHELL:
+			ret = R.drawable.shell24;
+			break;
+		default:
+			ret = R.drawable.tankstelle24;
+			break;
+		}
+		return ret;
+	}
+	public static String getTagName(Day day){
+		String ret = "";
+		switch (day) {
+		case MONDAY:
+			ret = "Montag";
+			break;
 
+		case TUESDAY:
+			ret = "Dienstag";
+			break;
+
+		case WEDNESDAY:
+			ret = "Mittwoch";
+			break;
+
+		case THURSDAY:
+			ret = "Donnerstag";
+			break;
+
+		case FRIDAY:
+			ret = "Freitag";
+			break;
+
+		case SATURDAY:
+			ret = "Samstag";
+			break;
+
+		case SUNDAY:
+			ret = "Sonntag";
+			break;
+
+		case HOLLIDAY:
+			ret = "Feiertage";
+			break;
+
+		default:
+			ret ="";
+			break;
+		}
+		return ret;
+	}
 }

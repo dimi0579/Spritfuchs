@@ -1,70 +1,120 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-    
-    android:background="#CAE1FF"
-    >
+ <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:background="@android:color/white"
+   android:fillViewport="true" >
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+	    android:orientation="vertical" 
+	    android:weightSum="3"
+   android:background="#CAE1FF">
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:id="@+id/ivTankstelleMarke"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="5dp"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="5dp"
+	            android:layout_marginRight="5dp"
+	            android:src="@drawable/agip64" />
+	
+	        <TextView
+	            android:id="@+id/tvTankstelleDetail"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_marginTop="5dp"
+	            android:layout_marginBottom="5dp"
+	            android:text="TextView" />
+			
+	        <RelativeLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent">
+	            
+	            <ImageButton
+			        android:id="@+id/ibDetailNavigation"
+			        android:layout_width="36dp"
+			        android:layout_height="match_parent"
+			        android:src="@android:drawable/ic_menu_compass" 
+			        android:onClick="navigateOnClickHandler"
+			        android:background="@android:color/black"
+		            android:layout_marginTop="5dp"
+		            android:layout_marginBottom="5dp"
+		            android:layout_marginRight="5dp"
+			        android:focusableInTouchMode="true"
+			        android:layout_alignParentRight="true"
+			        />
+	        </RelativeLayout>
+			
+	    </LinearLayout>
 
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+	    <TextView
+	        android:id="@+id/textView2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="0dp"
+	        android:layout_weight="0.26"
+	        android:background="@android:color/holo_blue_light"
+	        android:text=" Preise"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <ImageView
-            android:id="@+id/ivTankstelleMarke"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/ic_launcher" />
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/tvTankstelleDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+	        <TextView
+	            android:id="@+id/tvFuelSorts"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="E5\nE10\nDiesel"
+	            android:textAppearance="?android:attr/textAppearanceMedium" 
+	        android:layout_marginLeft="10dp"/>
 
-    </TableRow>
+	        <TextView
+	            android:id="@+id/tvFuelSortsPrices"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="€ 1.3999\n€ 1.409\n€ 1.239"
+	            android:textAppearance="?android:attr/textAppearanceMedium" 
+	            android:layout_marginLeft="10dp"/>
 
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:background="#A2B5CD">
+	    </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Öffnungszeiten"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginBottom="3dp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    <TextView
+	        android:id="@+id/textView5"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.17"
+	        android:text=" Öffnungszeiten"
+	        android:textAppearance="?android:attr/textAppearanceLarge" 
+	        android:background="@android:color/holo_blue_light"/>
 
-    </TableRow>
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
 
-    <TableRow
-        android:id="@+id/tableRow3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+	        <TextView
+	            android:id="@+id/tvTagName"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Montag\nDienstag\nMittwoch\nDonnerstag\nFreitag\nSamstag\nSonntag\nFeiertageMontag\nDienstag\nMittwoch\nDonnerstag\nFreitag\nSamstag\nSonntag\nFeiertageMontag\nDienstag\nMittwoch\nDonnerstag\nFreitag\nSamstag\nSonntag\nFeiertage"
+	            android:textAppearance="?android:attr/textAppearanceMedium" 
+	        android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:id="@+id/tvOZTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Medium Text"
-            android:layout_marginLeft="13dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+	        <TextView
+	            android:id="@+id/tvTagZeit"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="00:00 - 23:59\n00:00 - 23:59\n00:00 - 23:59\n00:00 - 23:59\n00:00 - 23:59\n00:00 - 23:59\ngeschlossen\ngeschlossen"
+	            android:textAppearance="?android:attr/textAppearanceMedium" 
+	        android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:id="@+id/tvOZVonBis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Medium Text"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+	    </LinearLayout>
 
-    </TableRow>
-
-</TableLayout>
+	</LinearLayout>
+</ScrollView>

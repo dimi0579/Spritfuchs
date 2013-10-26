@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.dmitrij.doberstein.spritfuchs.MainActivityMenu;
 import com.dmitrij.doberstein.spritfuchs.R;
 import com.dmitrij.doberstein.spritfuchs.SortePreis;
+import com.dmitrij.doberstein.spritfuchs.Utils;
 import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 
 public class CustomListAdapterNew extends BaseAdapter {
@@ -105,32 +106,7 @@ public class CustomListAdapterNew extends BaseAdapter {
         holder.tvTAdresse.setText(adresse);
         
         // Marke
-        switch(tp.getMark()){
-	    	case AGIP:
-	    		holder.ivMarke.setImageResource(R.drawable.agip24);
-	    		break;
-	    	case ARAL:
-	    		holder.ivMarke.setImageResource(R.drawable.aral24);
-	    		break;
-	    	case AVIA:
-	    		holder.ivMarke.setImageResource(R.drawable.avia24);
-	    		break;
-	    	case BP:
-	    		holder.ivMarke.setImageResource(R.drawable.bp24);
-	    		break;
-	    	case ESSO:
-	    		holder.ivMarke.setImageResource(R.drawable.esso24);
-	    		break;
-	    	case JET:
-	    		holder.ivMarke.setImageResource(R.drawable.jet24);
-	    		break;
-	    	case OMV:
-	    		holder.ivMarke.setImageResource(R.drawable.omv24);
-	    		break;
-	    	default:
-	    		holder.ivMarke.setImageResource(R.drawable.tankstelle24);
-	    		break;
-        }
+        holder.ivMarke.setImageResource(Utils.getTankstellenImageSmall(tp.getMark()));
         
         // Preis
         String fuelsort = "";

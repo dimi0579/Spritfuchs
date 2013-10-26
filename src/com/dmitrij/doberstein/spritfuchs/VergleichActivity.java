@@ -36,7 +36,7 @@ import android.widget.Toast;
 //import android.widget.Toast;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
-import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
+//import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
@@ -88,13 +88,13 @@ public class VergleichActivity extends Activity implements  MyListener{
         });
         
      // gps location
-     		try {
-     			MainActivityMenu.locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+ 		try {
+ 			MainActivityMenu.locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //     			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this.locationListener);
 
-     		} catch (Exception e) {
-     			
-     		}		
+ 		} catch (Exception e) {
+ 			System.out.println("test");
+ 		}		
 	}
 		
 	public void setListView(ArrayList<TankstellenPosition> data){

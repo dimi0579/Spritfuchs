@@ -41,7 +41,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme" >
+        android:theme="@style/AppBaseTheme" 
+		>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.MainActivity"
             android:label="@string/app_name"
@@ -55,44 +56,46 @@
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.MainActivityMenu"
-            android:label="@string/title_activity_main_activity_menu"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.StartpageActivity"
-            android:label="@string/title_activity_startpage"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichActivity"
-            android:label="@string/title_activity_vergleich"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.InfoActivity"
-            android:label="@string/title_activity_info"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.ConfActivity"
-            android:label="@string/title_activity_conf"
+            android:theme="@style/PreferencesTheme"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichListeActivity"
-            android:label="@string/title_activity_vergleich_liste" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichMapActivity"
-            android:label="@string/title_activity_vergleich_map" >
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail"
-            android:label="@string/title_activity_vergleich_activity_list_detail" >
+            android:label="@string/app_name" >
         </activity>
     </application>
 
