@@ -4,17 +4,12 @@ import java.util.ArrayList;
 
 import com.dmitrij.doberstein.spritfuchs.R;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckedTextView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +30,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		this.activity = activity;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
@@ -101,6 +97,7 @@ public class MyExpandableAdapter extends BaseExpandableListAdapter {
 		return 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getChildrenCount(int groupPosition) {
 		return ((ArrayList<String>) childtems.get(groupPosition)).size();

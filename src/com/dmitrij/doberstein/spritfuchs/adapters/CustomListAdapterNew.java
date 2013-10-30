@@ -3,12 +3,8 @@ package com.dmitrij.doberstein.spritfuchs.adapters;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
-import android.location.Location;
-import android.location.LocationManager;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
@@ -20,22 +16,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dmitrij.doberstein.spritfuchs.MainActivityMenu;
 import com.dmitrij.doberstein.spritfuchs.R;
-import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
-import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 
 public class CustomListAdapterNew extends BaseAdapter {
-	 
     private ArrayList<StationItem> listData;
- 
     private LayoutInflater layoutInflater;
-    
     private Context cont;
 
     public CustomListAdapterNew(Context context, ArrayList<StationItem> listData) {
@@ -80,7 +70,8 @@ public class CustomListAdapterNew extends BaseAdapter {
         }
     }
     
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @SuppressWarnings("unused")
+	public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
         	// altes layout

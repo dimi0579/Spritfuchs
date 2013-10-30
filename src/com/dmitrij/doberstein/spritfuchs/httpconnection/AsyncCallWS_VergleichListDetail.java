@@ -60,7 +60,6 @@ public class AsyncCallWS_VergleichListDetail extends AsyncTask<Void, Void, Void>
         	  progDialog.dismiss(); 
         }  
         catch (Exception e) { 
-             // TODO Auto-generated catch block 
              e.printStackTrace(); 
         }  
         Log.i(TAG, "onPostExecute");
@@ -72,7 +71,6 @@ public class AsyncCallWS_VergleichListDetail extends AsyncTask<Void, Void, Void>
             progDialog = ProgressDialog.show(myActivity, "Info", "Daten werden geladen!", true, true); 
        }  
        catch (Exception e) { 
-            // TODO Auto-generated catch block 
             e.printStackTrace(); 
        }
         Log.i(TAG, "onPreExecute");
@@ -85,7 +83,6 @@ public class AsyncCallWS_VergleichListDetail extends AsyncTask<Void, Void, Void>
     }
 
 	public void connect(Void... params){
-		// TODO Auto-generated method stub 
 //	      WebResponse webResponse = new WebResponse();
 	      final String NAMESPACE = "http://tempuri.org/";
 	      final String URL = "http://www.w3schools.com/webservices/tempconvert.asmx";
@@ -126,7 +123,6 @@ public class AsyncCallWS_VergleichListDetail extends AsyncTask<Void, Void, Void>
 	          @SuppressWarnings("unused")
 			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 	           } catch (Exception e) { 
-	                // TODO Auto-generated catch block 
 //	                publishProgress("Product search failed."); 
                    
                 Log.d(SOAP_ACTION, e.getMessage()); 
@@ -136,6 +132,7 @@ public class AsyncCallWS_VergleichListDetail extends AsyncTask<Void, Void, Void>
 //	                return webResponse; 
 	           } 
 	}
+	@SuppressWarnings("unused")
 	private TankstellenPosition getListDetailData() {
         TankstellenPosition tp = new TankstellenPosition();
         tp.setTankstelleName("Test1");

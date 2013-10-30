@@ -2,12 +2,10 @@ package com.dmitrij.doberstein.spritfuchs;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -17,23 +15,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.dmitrij.doberstein.spritfuchs.adapters.MyExpandableAdapter;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Openingtime;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
-import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 import com.dmitrij.doberstein.spritfuchs.httpconnection.AsyncCallWSGetHttp;
@@ -43,7 +35,7 @@ import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 
 /***
  * 
- * TODO - den TID-parameter aus der VergleichActivity übergeben...
+ * den TID-parameter aus der VergleichActivity übergeben...
  *  + Default-ImageView soll transparent oder leer sein...
  *
  */
@@ -167,7 +159,6 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 //			     .show();
 //			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -196,14 +187,13 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 
 	@Override
 	public void setListView(ArrayList<TankstellenPosition> data) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setListDetailView(ArrayList<TankstellenPosition> data) {
 		// only for test
-		String anschrift = "Testtankstelle\nTeststrass 8\n\n88990 Testort";
+//		String anschrift = "Testtankstelle\nTeststrass 8\n\n88990 Testort";
 //		tvTankstelleDetail.setText(anschrift);
 //		
 //		tvOZTag.setText("Montag" +

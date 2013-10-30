@@ -1,17 +1,12 @@
 package com.dmitrij.doberstein.spritfuchs;
 
-//import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-//import java.util.Calendar;
-//import java.util.Locale;
-
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +19,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,8 +26,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
-//import android.widget.Toast;
 
 import com.dmitrij.doberstein.spritfuchs.adapters.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
@@ -173,7 +165,7 @@ public class VergleichActivity extends Activity implements  MyListener{
 //				Price price)
 		return ret;
 	}
-	@SuppressWarnings("unused")
+
 //	private ArrayList<TankstellenPosition> getListData() {
 //        ArrayList<TankstellenPosition> results = new ArrayList<TankstellenPosition>();
 //        
@@ -368,7 +360,6 @@ public class VergleichActivity extends Activity implements  MyListener{
 //		task.setListener(this);
 //		task.execute(); 
 		
-		// TODO hier sollen nun die parameter übergeben werden
 		// xlat;xlong;umkreis
 		String params = "";
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -390,7 +381,6 @@ public class VergleichActivity extends Activity implements  MyListener{
     }
 	@Override
 	public void setListDetailView(ArrayList<TankstellenPosition> data) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override

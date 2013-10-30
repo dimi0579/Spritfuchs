@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +16,15 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 public class CustomListAdapter extends BaseAdapter {
-	 
     private ArrayList<TankstellenPosition> listData;
- 
     private LayoutInflater layoutInflater;
     
-    private Context cont;
+//	private Context cont;
  
     public CustomListAdapter(Context context, ArrayList<TankstellenPosition> listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(context);
-        cont = context;
+//        cont = context;
     }
  
     @Override
@@ -57,18 +53,15 @@ public class CustomListAdapter extends BaseAdapter {
             holder.tankstelleEntfernung = (TextView) convertView.findViewById(R.id.tvTentfernung);
             holder.tankstelleDiesel = (TextView) convertView.findViewById(R.id.tvTdiesel);
             holder.tankstelleLDiesel = (TextView)convertView.findViewById(R.id.tvLdiesel);
-            
-            
-            
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.cont);
-            String strKraftstoff = prefs.getString("prefKraftstoff", "1");
-            int intKraftstoff = 1;
-            try {
-				intKraftstoff = Integer.parseInt(strKraftstoff);
-			} 
-            catch (Exception e) {
-			}
-            
+
+//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.cont);
+//            String strKraftstoff = prefs.getString("prefKraftstoff", "1");
+//            int intKraftstoff = 1;
+//            try {
+//				intKraftstoff = Integer.parseInt(strKraftstoff);
+//			} 
+//            catch (Exception e) {
+//			}
 
     		holder.tankstelleDiesel.setTypeface(null, Typeface.BOLD);
     		holder.tankstelleLDiesel.setTypeface(null,Typeface.BOLD);          

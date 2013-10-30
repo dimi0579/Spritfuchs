@@ -1,13 +1,8 @@
 package com.dmitrij.doberstein.spritfuchs;
 
-//import java.text.SimpleDateFormat;
-//import java.util.Calendar;
-//import java.util.Locale;
-
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;

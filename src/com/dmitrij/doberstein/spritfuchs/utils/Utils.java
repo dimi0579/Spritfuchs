@@ -14,7 +14,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.dmitrij.doberstein.spritfuchs.R;
-import com.dmitrij.doberstein.spritfuchs.R.drawable;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Oeffnungszeiten;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
@@ -53,7 +52,6 @@ public class Utils {
 				doc = dBuilder.parse(is);
 				doc.getDocumentElement().normalize();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
