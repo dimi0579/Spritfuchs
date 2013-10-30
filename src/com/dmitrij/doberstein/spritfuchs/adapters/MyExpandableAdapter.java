@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs.dataclasses;
+package com.dmitrij.doberstein.spritfuchs.adapters;
 
 import java.util.ArrayList;
 

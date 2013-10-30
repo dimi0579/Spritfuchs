@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs.dataclasses;
+package com.dmitrij.doberstein.spritfuchs.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.R;
 import com.dmitrij.doberstein.spritfuchs.SortePreis;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 public class CustomListAdapter extends BaseAdapter {
 	 

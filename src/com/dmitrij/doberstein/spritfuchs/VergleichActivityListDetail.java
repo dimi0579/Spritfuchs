@@ -28,8 +28,8 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.dmitrij.doberstein.spritfuchs.adapters.MyExpandableAdapter;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
-import com.dmitrij.doberstein.spritfuchs.dataclasses.MyExpandableAdapter;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Openingtime;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;

@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs.dataclasses;
+package com.dmitrij.doberstein.spritfuchs.adapters;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +24,10 @@ import com.dmitrij.doberstein.spritfuchs.MainActivityMenu;
 import com.dmitrij.doberstein.spritfuchs.R;
 import com.dmitrij.doberstein.spritfuchs.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 
 public class CustomListAdapterNew extends BaseAdapter {

@@ -35,9 +35,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 //import android.widget.Toast;
 
+import com.dmitrij.doberstein.spritfuchs.adapters.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 //import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
-import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
