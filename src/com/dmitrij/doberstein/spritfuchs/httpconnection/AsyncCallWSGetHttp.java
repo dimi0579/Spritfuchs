@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs;
+package com.dmitrij.doberstein.spritfuchs.httpconnection;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,9 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.dmitrij.doberstein.spritfuchs.MyListener;
+import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
+import com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 import com.dmitrij.doberstein.spritfuchs.utils.Utils.ObjectTypes;
@@ -23,6 +26,7 @@ import com.dmitrij.doberstein.spritfuchs.utils.Utils.ObjectTypes;
 public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 	private static final String VA = "com.dmitrij.doberstein.spritfuchs.VergleichActivity";
 	private static final String VALD = "com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail";
+	@SuppressWarnings("unused")
 	private static final String XMLHEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	
 	private MyListener listener;
@@ -50,7 +54,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
 	AsyncCallWSGetHttp(){
 		
 	}
-	AsyncCallWSGetHttp(String namespace, String url, String params, Object activity){
+	public AsyncCallWSGetHttp(String namespace, String url, String params, Object activity){
 		this.namespace = namespace;
 		this.url = url;
 		this.params = params;
@@ -230,6 +234,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
         
         return results;
 	}
+	@SuppressWarnings("unused")
 	private TankstellenPosition getListDetailData() {
         TankstellenPosition tp = new TankstellenPosition();
         tp.setTankstelleName("Test1");

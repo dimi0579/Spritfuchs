@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs;
+package com.dmitrij.doberstein.spritfuchs.httpconnection;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.dmitrij.doberstein.spritfuchs.MyListener;
+import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 // For async SOAP connection
