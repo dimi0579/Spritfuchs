@@ -59,7 +59,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="0dp"
 	        android:layout_weight="0.26"
-	        android:background="@android:color/holo_blue_light"
+	        android:background="@android:color/darker_gray"
 	        android:text=" Preise"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
