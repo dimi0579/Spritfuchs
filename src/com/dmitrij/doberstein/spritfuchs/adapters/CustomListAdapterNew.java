@@ -22,11 +22,11 @@ import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.MainActivityMenu;
 import com.dmitrij.doberstein.spritfuchs.R;
-import com.dmitrij.doberstein.spritfuchs.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 

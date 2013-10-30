@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs;
+package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
 public class SortePreis {
 	private String preisId;

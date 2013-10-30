@@ -2,8 +2,6 @@ package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
 import java.util.List;
 
-import com.dmitrij.doberstein.spritfuchs.Oeffnungszeiten;
-import com.dmitrij.doberstein.spritfuchs.SortePreis;
 
 public class TankstellenPosition {
 	private String tankstelleId;

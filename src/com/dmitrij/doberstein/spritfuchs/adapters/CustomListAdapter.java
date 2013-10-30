@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.R;
-import com.dmitrij.doberstein.spritfuchs.SortePreis;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
 public class CustomListAdapter extends BaseAdapter {

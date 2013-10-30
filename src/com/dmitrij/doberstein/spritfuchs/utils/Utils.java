@@ -13,11 +13,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.dmitrij.doberstein.spritfuchs.Oeffnungszeiten;
 import com.dmitrij.doberstein.spritfuchs.R;
-import com.dmitrij.doberstein.spritfuchs.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.R.drawable;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Oeffnungszeiten;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 
