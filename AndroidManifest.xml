@@ -60,11 +60,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.dmitrij.doberstein.spritfuchs.StartpageActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
