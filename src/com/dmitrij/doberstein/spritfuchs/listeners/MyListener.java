@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs;
+package com.dmitrij.doberstein.spritfuchs.listeners;
 
 import java.util.ArrayList;
 

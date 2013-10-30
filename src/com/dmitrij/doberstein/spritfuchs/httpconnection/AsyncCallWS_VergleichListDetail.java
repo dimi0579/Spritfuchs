@@ -11,9 +11,9 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.dmitrij.doberstein.spritfuchs.MyListener;
 import com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
+import com.dmitrij.doberstein.spritfuchs.listeners.MyListener;
 
 // For async SOAP connection
 //AsyncCallWS task = new AsyncCallWS();

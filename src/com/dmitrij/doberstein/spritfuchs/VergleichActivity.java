@@ -47,6 +47,7 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 import com.dmitrij.doberstein.spritfuchs.httpconnection.AsyncCallWSGetHttp;
+import com.dmitrij.doberstein.spritfuchs.listeners.MyListener;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)

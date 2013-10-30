@@ -1,4 +1,4 @@
-package com.dmitrij.doberstein.spritfuchs;
+package com.dmitrij.doberstein.spritfuchs.listeners;
 
 import android.location.Location;
 import android.location.LocationListener;
