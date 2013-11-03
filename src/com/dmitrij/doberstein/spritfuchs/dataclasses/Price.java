@@ -1,15 +1,16 @@
 package com.dmitrij.doberstein.spritfuchs.dataclasses;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Price implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private FuelSort fuel;
     private double price;
-    private long timestamp;
+    private Date timestamp;
 	
-    public Price(FuelSort fuel, double price, long timestamp) {
+    public Price(FuelSort fuel, double price, Date timestamp) {
 		super();
 		this.fuel = fuel;
 		this.price = price;
@@ -32,11 +33,11 @@ public class Price implements Serializable{
 		this.price = price;
 	}
 
-	public long getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(long timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 }

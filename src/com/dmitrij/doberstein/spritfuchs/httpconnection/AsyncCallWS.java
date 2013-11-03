@@ -57,7 +57,7 @@ public class AsyncCallWS extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
     	super.onPreExecute(); 
         try { 
-        	listener.setListView(getListData());
+//        	listener.setListView(getListData()); only for test
         	  progDialog.dismiss(); 
         }  
         catch (Exception e) { 

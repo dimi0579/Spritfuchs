@@ -9,7 +9,7 @@ public class StationItem extends Station implements Serializable{
 	private double destination;
     private List<Price> prices;
 
-    public StationItem(List<Openingtime> openingTimes, String id, String name,
+    public StationItem(List<BussinessHours> openingTimes, String id, String name,
 			StationBrand mark, String street, String houseNumber, String city,
 			int cityCode, double latitude, double longtitude, double destination,
 			List<Price> prices) {

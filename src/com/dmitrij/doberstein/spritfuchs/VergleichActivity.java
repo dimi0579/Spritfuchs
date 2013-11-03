@@ -46,7 +46,7 @@ import com.dmitrij.doberstein.spritfuchs.listeners.MyListener;
 public class VergleichActivity extends Activity implements  MyListener{
 	private static final int RESULT_SETTINGS = 1;	
 	
-	private ListView lv1;
+	public ListView lv1;
 //	LocationManager locationManager;
 	
 	private String xlat = "";
@@ -91,9 +91,10 @@ public class VergleichActivity extends Activity implements  MyListener{
  		}		
 	}
 		
-	public void setListView(ArrayList<TankstellenPosition> data){
-		if(data.size() == 0){
-			lv1.setAdapter(new CustomListAdapterNew(this, getListData())); // -- new Adaprter test
+	public void setListView(ArrayList<StationItem> data){
+		if(data.size() > 0){
+			lv1.setAdapter(new CustomListAdapterNew(this, data)); // -- new Adaprter reale daten
+//			lv1.setAdapter(new CustomListAdapterNew(this, getListData())); // -- new Adaprter test
 //			lv1.setAdapter(new CustomListAdapter(this, getListData())); // -- old Adaprter test
 //			lv1.setAdapter(new CustomListAdapter(this, data)); -- original
 		}
@@ -132,30 +133,30 @@ public class VergleichActivity extends Activity implements  MyListener{
 		openingTimes.add(ptFE);
 		
 		List<Price> prices = new ArrayList<Price>();
-		Price price = new Price(FuelSort.E5, 1.345, new Date().getTime());
+		Price price = new Price(FuelSort.E5, 1.345, new Date());
 		prices.add(price);
-		price = new Price(FuelSort.E10, 1.345, new Date().getTime());
+		price = new Price(FuelSort.E10, 1.345, new Date());
 		prices.add(price);
-		price = new Price(FuelSort.DIESEL, 1.345, new Date().getTime());
+		price = new Price(FuelSort.DIESEL, 1.345, new Date());
 		prices.add(price);
 		
-		StationItem si = new StationItem(openingTimes, "1", "AGIP Überlingen", StationBrand.AGIP, 
+		StationItem si = new StationItem(null, "1", "AGIP Überlingen", StationBrand.AGIP, 
 				"NussdorferStr.", "1", "Überlingen", 88662, 47.766175, 9.170277, 0.5, prices);
 		ret.add(si);
 		
-		si = new StationItem(openingTimes, "1", "ARAL Meersburg", StationBrand.ARAL, 
+		si = new StationItem(null, "1", "ARAL Meersburg", StationBrand.ARAL, 
 				"NussdorferStr.", "1", "Meersburg", 88662, 47.696957, 9.272724, (double)12, prices);
 		ret.add(si);
 		
-		si = new StationItem(openingTimes, "1", "AVIA Stockach", StationBrand.AVIA, 
+		si = new StationItem(null, "1", "AVIA Stockach", StationBrand.AVIA, 
 				"NussdorferStr.", "1", "Stockach", 88662, 47.853164, 9.009153, (double)9.5, prices);
 		ret.add(si);
 		
-		si = new StationItem(openingTimes, "1", "BP Singen", StationBrand.BP, 
+		si = new StationItem(null, "1", "BP Singen", StationBrand.BP, 
 				"NussdorferStr.", "1", "Singen", 88662, 47.764064, 8.853396, (double)23.6, prices);
 		ret.add(si);
 		
-		si = new StationItem(openingTimes, "1", "TEST Konstanz", StationBrand.DEFAULT, 
+		si = new StationItem(null, "1", "TEST Konstanz", StationBrand.DEFAULT, 
 				"NussdorferStr.", "1", "Konstanz", 88662, 47.677950, 9.173238, (double)32.2, prices);
 		ret.add(si);
 

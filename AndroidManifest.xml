@@ -62,7 +62,8 @@
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            android:theme="@style/MyTheme">
         </activity>
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.InfoActivity"
@@ -83,7 +84,8 @@
         <activity
             android:name="com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail"
             android:label="@string/app_name" 
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"  
+            android:theme="@style/MyTheme">
         </activity>
     </application>
 

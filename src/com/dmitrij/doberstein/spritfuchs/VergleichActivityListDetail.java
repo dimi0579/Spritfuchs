@@ -1,5 +1,6 @@
 package com.dmitrij.doberstein.spritfuchs;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import android.annotation.TargetApi;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.BussinessHours;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Openingtime;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
@@ -92,7 +94,7 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 				ivTankstelleMarke.setImageResource(Utils.getTankstellenImage(si.getMark()));
 				// details
 				Spanned details = Html.fromHtml("<b><big>" + si.getName() + "</big></b><br />" + 
-		                si.getStreet() + " " + si.getHouseNumber() + "<br />" +
+		                si.getStreet() + "<br />" +
 						si.getCityCode() + " " + si.getCity());
 				tvTankstelleDetail.setText(details);
 				// preise
@@ -109,11 +111,11 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 				// oeffnungszeiten
 				String tagName = "";
 				String tagZeit = "";
-				List<Openingtime> ops = si.getOpeningTimes();
+				List<BussinessHours> ops = si.getBussinessHours();
 				for(int i = 0; i < ops.size(); i++){
-					Openingtime op = ops.get(i);
+					BussinessHours op = ops.get(i);
 					tagName += Utils.getTagName(op.getDay()) + "\n";
-					tagZeit += op.getFrom() + " - " + op.getTill() + "\n";
+					tagZeit += op.getFromToString() + " - " + op.getToToString() + "\n";
 				}
 				tvTagName.setText(tagName);
 				tvTagZeit.setText(tagZeit);
@@ -186,7 +188,7 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
     }
 
 	@Override
-	public void setListView(ArrayList<TankstellenPosition> data) {
+	public void setListView(ArrayList<StationItem> data) {
 		
 	}
 
@@ -287,12 +289,12 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 		// Android
 		ArrayList<String> child = new ArrayList<String>();
 		
-		List<Openingtime> li = si.getOpeningTimes();
+		List<BussinessHours> li = si.getBussinessHours();
 		if(li != null){
 			for(int i = 0; i < li.size(); i++){
-				Openingtime ot = li.get(i);
+				BussinessHours ot = li.get(i);
 				if(ot != null){
-					String temp = ot.getDay() + "\t" + ot.getFrom() + " - " + ot.getTill();
+					String temp = ot.getDay() + "\t" + ot.getFromToString() + " - " + ot.getToToString();
 					child.add(temp);
 				}
 			}

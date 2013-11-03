@@ -6,7 +6,7 @@ import java.util.List;
 public class Station implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private List<Openingtime> openingTimes;
+	private List<BussinessHours> bussinessHours;
     
     private String id;
 
@@ -26,11 +26,11 @@ public class Station implements Serializable {
 
     private double longtitude;
 
-    public Station(List<Openingtime> openingTimes, String id, String name,
+    public Station(List<BussinessHours> bussinessHours, String id, String name,
     		StationBrand mark, String street, String houseNumber, String city,
 			int cityCode, double latitude, double longtitude) {
 		super();
-		this.openingTimes = openingTimes;
+		this.bussinessHours = bussinessHours;
 		this.id = id;
 		this.name = name;
 		this.mark = mark;
@@ -74,8 +74,8 @@ public class Station implements Serializable {
             return name;
     }
 
-    public List<Openingtime> getOpeningTimes() {
-            return openingTimes;
+    public List<BussinessHours> getBussinessHours() {
+            return bussinessHours;
     }
 
     public String getStreet() {
@@ -108,11 +108,10 @@ public class Station implements Serializable {
     public void setName(String name) {
             this.name = name;
     }
-    public void setOpeningTimes(List<Openingtime> openingTimes) {
-            this.openingTimes = openingTimes;
+    public void setBussinessHours(List<BussinessHours> bussinessHours) {
+            this.bussinessHours = bussinessHours;
     }
     public void setStreet(String street) {
             this.street = street;
     }
-
 }

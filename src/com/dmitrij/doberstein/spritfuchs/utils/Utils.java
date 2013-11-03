@@ -1,7 +1,9 @@
 package com.dmitrij.doberstein.spritfuchs.utils;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,12 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Oeffnungszeiten;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class Utils {
 	private static final String XMLHEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -26,7 +33,7 @@ public class Utils {
 //	private static final String TANSTELLEDATEN = "tankstelledaten";
 	public static enum ObjectTypes {
 		TANKSTELLENLISTE,
-		TANKSTELLEDATEN
+		TANKSTELLEDATEN, STATIONITEMLIST
 	};
 	
 	public static String extracXml(String source){
@@ -63,8 +70,34 @@ public class Utils {
 		if(objectType != null){
 			Document doc = null;
 			ArrayList<TankstellenPosition> atp = null;
+			ArrayList<StationItem> asi = null;
 			
 			switch (objectType){
+			case STATIONITEMLIST:
+				asi = new ArrayList<StationItem>();
+
+				Gson gson = new Gson();
+				try {
+					 
+					JsonParser parser = new JsonParser();
+				    JsonArray Jarray = parser.parse(xmlString).getAsJsonArray();
+				    
+				    for(JsonElement obj : Jarray )
+				    {
+						//convert the json string back to object
+						StationItem si = gson.fromJson(obj, StationItem.class);
+						if(si != null){
+							asi.add(si);
+						}
+						System.out.println(obj);
+				    }
+			 
+			 
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return asi;
+//				break;
 			case TANKSTELLENLISTE:
 				atp = new ArrayList<TankstellenPosition>();
 				doc = Utils.getDocObject(xmlString);

@@ -9,7 +9,7 @@
 	    android:orientation="vertical" 
 	    android:weightSum="3"
    android:background="#CAE1FF">
-	
+
 	    <LinearLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content" >
@@ -19,7 +19,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_marginLeft="5dp"
-	            android:layout_marginTop="5dp"
+	            android:layout_marginTop="10dp"
 	            android:layout_marginBottom="5dp"
 	            android:layout_marginRight="5dp"
 	            android:src="@drawable/agip64" />
@@ -59,8 +59,10 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="0dp"
 	        android:layout_weight="0.26"
-	        android:background="@android:color/darker_gray"
+	        android:background="#a1aebf"
 	        android:text=" Preise"
+	        android:gravity="center_vertical"
+	        android:textStyle="bold"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	    <LinearLayout
@@ -80,6 +82,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:text="€ 1.3999\n€ 1.409\n€ 1.239"
+	        android:gravity="center_vertical"
 	            android:textAppearance="?android:attr/textAppearanceMedium" 
 	            android:layout_marginLeft="10dp"/>
 
@@ -91,8 +94,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_weight="0.17"
 	        android:text=" Öffnungszeiten"
-	        android:textAppearance="?android:attr/textAppearanceLarge" 
-	        android:background="@android:color/holo_blue_light"/>
+	        android:background="#a1aebf"
+	        android:textStyle="bold"
+	        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
 	    <LinearLayout
 	        android:layout_width="match_parent"

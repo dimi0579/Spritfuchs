@@ -1,6 +1,7 @@
 package com.dmitrij.doberstein.spritfuchs.httpconnection;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -14,6 +15,8 @@ import android.util.Log;
 
 import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
 import com.dmitrij.doberstein.spritfuchs.VergleichActivityListDetail;
+import com.dmitrij.doberstein.spritfuchs.adapters.CustomListAdapterNew;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 import com.dmitrij.doberstein.spritfuchs.listeners.MyListener;
 import com.dmitrij.doberstein.spritfuchs.utils.Utils;
@@ -104,12 +107,20 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
         	String objectClassName = this.myActivity.getClass().getName();
 
         	if(VA.equalsIgnoreCase(objectClassName)){
-				ArrayList<TankstellenPosition> tankstellen = new ArrayList<TankstellenPosition>();
+//				ArrayList<TankstellenPosition> tankstellen = new ArrayList<TankstellenPosition>();
+				ArrayList<StationItem> tankstellen = new ArrayList<StationItem>();
         		if(this.returnString != null){
-        			tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE, this.returnString);
+//        			tankstellen = (ArrayList<TankstellenPosition>)Utils.getObjects(ObjectTypes.TANKSTELLENLISTE, this.returnString);
+        			tankstellen = (ArrayList<StationItem>)Utils.getObjects(ObjectTypes.STATIONITEMLIST, this.returnString);
         		}
         		
+        		
+        		
+        		
         		listener.setListView(tankstellen);
+        		
+        		
+        		
         	}
         	else if(VALD.equalsIgnoreCase(objectClassName)){
         		ArrayList<TankstellenPosition> tankstellen = new ArrayList<TankstellenPosition>();
@@ -163,8 +174,11 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
       String URL = "";
 	
       if(VA.equalsIgnoreCase(myActivity.getClass().getName())){
-    	  URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLEN&lat=" + 
-        		  xlat + "&long=" + xlong + "&umkreis=" + umkreis + "&kraftstoff=" + kraftstoff;
+//    	  URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLEN&lat=" + 
+//        		  xlat + "&long=" + xlong + "&umkreis=" + umkreis + "&kraftstoff=" + kraftstoff;
+    	  URL = "http://spritfuchs.org/backend/rest/query?latitude=" + xlat +
+    			  "&longtitude=" + xlong +
+    			  "&destination=" + umkreis;
 	  }
 	  else if(VALD.equalsIgnoreCase(myActivity.getClass().getName())){
 		  URL = "http://spritfuchs.somee.com/WebService.aspx?Aktion=GETTANKSTELLENPOSITION&tid=" + this.tid;
@@ -182,7 +196,7 @@ public class AsyncCallWSGetHttp extends AsyncTask<Void, Void, Void> {
            returnString = Client.execute(httpget, responseHandler);
            
            // extrahiere xml aus dem response
-           returnString = Utils.extracXml(returnString);
+//           returnString = Utils.extracXml(returnString); wird nicht mehr gebraucht, da JSON
            
        }
      catch(Exception ex)

@@ -2,6 +2,7 @@ package com.dmitrij.doberstein.spritfuchs.adapters;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -96,12 +97,14 @@ public class CustomListAdapterNew extends BaseAdapter {
         // Tankstellenname
         holder.tvTName.setText(tp.getName());
         // Tankstellenadresse
-        String adresse = tp.getStreet() + " " + tp.getHouseNumber() + "\n" + 
+//        String adresse = tp.getStreet() + " " + tp.getHouseNumber() + "\n" + ///**********************
+//        		tp.getCityCode() + " " + tp.getCity();
+        String adresse = tp.getStreet() + "\n" + 
         		tp.getCityCode() + " " + tp.getCity();
         holder.tvTAdresse.setText(adresse);
         
         // Marke
-        holder.ivMarke.setImageResource(Utils.getTankstellenImageSmall(tp.getMark()));
+//        holder.ivMarke.setImageResource(Utils.getTankstellenImageSmall(tp.getMark()));
         
         // Preis
         String fuelsort = "";
@@ -129,9 +132,12 @@ public class CustomListAdapterNew extends BaseAdapter {
         			break;
         		}
         		// TImestamp
-        		long ts = sp.getTimestamp();
+//        		long ts = sp.getTimestamp();
+        		Date ts = sp.getTimestamp();
+        		
         		Calendar cal = Calendar.getInstance();
-        		cal.setTimeInMillis(ts * 1000);
+        		cal.setTime(ts);
+//        		cal.setTimeInMillis(ts * 1000);
         		
         		String stunden = (cal.get(Calendar.HOUR)) < 10 ? "0" + cal.get(Calendar.HOUR) : "" + cal.get(Calendar.HOUR);
         		String minuten = (cal.get(Calendar.MINUTE)) < 10 ? "0" + cal.get(Calendar.MINUTE) : "" + cal.get(Calendar.MINUTE);
@@ -144,7 +150,8 @@ public class CustomListAdapterNew extends BaseAdapter {
         		// Entfernung
         		double distanz = tp.getDestination();
 //        		sorteTimeEntf += (distanz < 1.00) ? distanz + " m" : distanz + " km";
-        		dist = (distanz < 1.00) ? distanz + " m" : distanz + " km";
+        		String distStr = (distanz < 1.00) ? " m" : " km";
+        		dist = String.format("%.2f", distanz) + distStr;
         		
         		// Preis
         		String preis = "€ " + sp.getPrice();

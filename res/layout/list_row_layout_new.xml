@@ -31,13 +31,17 @@
 
     <TextView
         android:id="@+id/tvTAdresse"
-        android:layout_width="wrap_content"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ivMarke"
         android:layout_below="@+id/ivMarke"
         android:layout_marginTop="5dp"
         android:text="Test Strasse 6c\n88662 Überlingen"
-        android:textSize="16sp" />
+        android:textSize="12sp" 
+        
+        android:scrollHorizontally="false"
+        android:minLines="2"
+        />
 
     <ImageButton
         android:id="@+id/ibNavigation"
