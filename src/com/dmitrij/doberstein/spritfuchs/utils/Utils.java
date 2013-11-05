@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,9 +19,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.MonthDisplayHelper;
+
 import com.dmitrij.doberstein.spritfuchs.R;
+import com.dmitrij.doberstein.spritfuchs.VergleichActivity;
+import com.dmitrij.doberstein.spritfuchs.adapters.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Oeffnungszeiten;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.SortePreis;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationBrand;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
@@ -29,6 +43,7 @@ import com.google.gson.JsonParser;
 
 public class Utils {
 	private static final String XMLHEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+	public static final String PREFNAME = "myprefs";
 //	private static final String TANKSTELLENLISTE = "alletankstellen";
 //	private static final String TANSTELLEDATEN = "tankstelledaten";
 	public static enum ObjectTypes {
@@ -364,5 +379,184 @@ public class Utils {
 			break;
 		}
 		return ret;
+	}
+	
+	public static FuelSort getSettingsFuelSort(Context context){
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String strKraftstoff = prefs.getString("prefKraftstoff", "1");
+        int intKraftstoff = 1;
+        try {
+			intKraftstoff = Integer.parseInt(strKraftstoff);
+		} 
+        catch (Exception e) {
+		}
+        
+        if(intKraftstoff == 3){
+        	return FuelSort.DIESEL;
+        }
+        else if(intKraftstoff == 2){
+        	return FuelSort.E10;
+        }
+        else{
+        	return FuelSort.E5;
+        }
+		
+	}
+	
+
+	
+	public static Day getDayFromDate(Date date){
+		if(date == null){
+			date = new Date();
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);		
+		
+		switch(cal.get(Calendar.DAY_OF_WEEK)){
+		case Calendar.MONDAY:
+			return Day.MONDAY;
+		case Calendar.TUESDAY:
+			return Day.TUESDAY;
+		case Calendar.WEDNESDAY:
+			return Day.WEDNESDAY;
+		case Calendar.THURSDAY:
+			return Day.THURSDAY;
+		case Calendar.FRIDAY:
+			return Day.FRIDAY;
+		case Calendar.SATURDAY:
+			return Day.SATURDAY;
+		case Calendar.SUNDAY:
+			return Day.SUNDAY;
+		default:
+			return Day.HOLLIDAY;
+		}
+	}
+	
+	public static class Sortation{
+		public static final int SORTPRICE = 1;
+		public static final int SORTDESTINATION = 2;
+		public static final int SORTPRICETIMESTAMP = 3;
+		// Sortierung in den Prefs
+		//	1 - Preis
+		//	2 - Entferung
+		//	3 - Zeit
+		public static int getSettingsSortaion(Context context){
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+	        int intSortation = prefs.getInt("prefSortation", -1);
+
+	        if(intSortation == -1){
+	        	intSortation = 1;
+
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putInt("prefSortation", intSortation);
+				editor.commit();
+	        }
+	        
+	        return intSortation;
+		}
+		public static void setSettingsSortation(Context context, int sortation){
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			SharedPreferences.Editor editor = prefs.edit();
+			sortation = (sortation == -1) ? 1 : sortation;
+			editor.putInt("prefSortation", sortation);
+			editor.commit();
+		}
+		
+		public static int index = 0;
+		public static ArrayList<StationItem> sortStationItemListOnPrice(ArrayList<StationItem> data, FuelSort fs){
+			ArrayList<StationItem> al = new ArrayList<StationItem>();			
+			StationItem[] siDataArray = data.toArray(new StationItem[data.size()]);
+			
+			index = 0;
+			switch(fs){
+			case DIESEL:
+				index = 2;
+				break;
+			case E10:
+				index = 1;
+				break;
+			default:
+				index = 0;
+				break;
+			}
+			
+			Arrays.sort( siDataArray, new Comparator<StationItem>(){
+		        public int compare( StationItem a, StationItem b ){
+		        	double priceA = a.getPrices().get(index).getPrice();
+		        	double priceB = b.getPrices().get(index).getPrice();
+		        	
+		            return ((int) (priceA - priceB) * 1000);
+		        }
+		    });
+			index = 0;
+			
+			
+			try {
+				al.addAll((List<StationItem>) Arrays.asList(siDataArray));				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return al;
+		}
+		public static ArrayList<StationItem> sortStationItemListOnPriceTimestamp(ArrayList<StationItem> data, FuelSort fs){
+			ArrayList<StationItem> al = new ArrayList<StationItem>();			
+			StationItem[] siDataArray = data.toArray(new StationItem[data.size()]);
+			
+			index = 0;
+			switch(fs){
+			case DIESEL:
+				index = 2;
+				break;
+			case E10:
+				index = 1;
+				break;
+			default:
+				index = 0;
+				break;
+			}
+			
+			Arrays.sort( siDataArray, new Comparator<StationItem>(){
+		        public int compare( StationItem a, StationItem b ){
+		        	Date dateA = a.getPrices().get(index).getTimestamp();
+		        	Date dateB = b.getPrices().get(index).getTimestamp();
+		        	
+		            return ((int) (dateA.getTime() - dateB.getTime()));
+		        }
+		    });
+			index = 0;
+			
+			
+			try {
+				al.addAll((List<StationItem>) Arrays.asList(siDataArray));				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return al;
+		}
+		public static ArrayList<StationItem> sortStationItemListOnDestination(ArrayList<StationItem> data){
+			ArrayList<StationItem> al = new ArrayList<StationItem>();			
+			StationItem[] siDataArray = data.toArray(new StationItem[data.size()]);
+
+			Arrays.sort( siDataArray, new Comparator<StationItem>(){
+		        public int compare( StationItem a, StationItem b ){
+		        	double destinationA = a.getDestination();
+		        	double destinationB = b.getDestination();
+		        	
+		            return ((int) (destinationA - destinationB) * 1000);
+		        }
+		    });
+			index = 0;
+			
+			
+			try {
+				al.addAll((List<StationItem>) Arrays.asList(siDataArray));				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return al;
+		}
 	}
 }

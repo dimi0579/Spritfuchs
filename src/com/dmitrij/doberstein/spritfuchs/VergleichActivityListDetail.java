@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.BussinessHours;
+import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Openingtime;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Price;
@@ -101,24 +102,60 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 				String sorte = "";
 				String sortenPreis = "";
 				List<Price> prices = si.getPrices();
+				
+				
+				
+				Spanned sdSorte;// = Html.fromHtml("<b><big>" + fuelsort + "</big></b>" +  "<br />" + timestamp + "<br />" + dist);
+				Spanned sdSortenPreis;// = Html.fromHtml("<b><big>" + fuelsort + "</big></b>" +  "<br />" + timestamp + "<br />" + dist);
+				
 				for(int i = 0; i < prices.size(); i++){
 					Price price = prices.get(i);
-					sorte += price.getFuel().name() + "\n";
-					sortenPreis += "€ " + price.getPrice() + "\n";
+					
+					FuelSort fs = Utils.getSettingsFuelSort(this);
+					if(fs == price.getFuel()){
+						sorte += "<b><big>" + price.getFuel() + "</big></b><br/>";
+						sortenPreis += "<b><big>€ " + price.getPrice() + "</big></b><br/>";
+					}
+					else{
+						sorte += price.getFuel() + "<br/>";
+						sortenPreis += "€ " + price.getPrice() + "<br/>";
+					}
 				}
-				tvFuelSorts.setText(sorte);
-				tvFuelSortsPrices.setText(sortenPreis);
+				sdSorte = Html.fromHtml(sorte);
+				sdSortenPreis = Html.fromHtml(sortenPreis);
+				
+				tvFuelSorts.setText(sdSorte);
+				tvFuelSortsPrices.setText(sdSortenPreis);
+				
 				// oeffnungszeiten
+				Spanned spTagName;
+				Spanned spTagZeit;
+				
 				String tagName = "";
-				String tagZeit = "";
+				String tagZeit = "<center>";
 				List<BussinessHours> ops = si.getBussinessHours();
 				for(int i = 0; i < ops.size(); i++){
 					BussinessHours op = ops.get(i);
-					tagName += Utils.getTagName(op.getDay()) + "\n";
-					tagZeit += op.getFromToString() + " - " + op.getToToString() + "\n";
+					
+					if(op.getDay() == Utils.getDayFromDate(null)){
+
+						tagName += "<b><big>" + Utils.getTagName(op.getDay()) + "</big></b><br/>";
+						tagZeit += "<b><big>" + op.getFromToString() + " - " + op.getToToString() + "</big></b><br/>";
+					}
+					else{
+
+						tagName += Utils.getTagName(op.getDay()) + "<br/>";
+						tagZeit += op.getFromToString() + " - " + op.getToToString() + "<br/>";
+					}
+					
+//					tagName += Utils.getTagName(op.getDay()) + "\n";
+//					tagZeit += op.getFromToString() + " - " + op.getToToString() + "\n";					
 				}
-				tvTagName.setText(tagName);
-				tvTagZeit.setText(tagZeit);
+				spTagName = Html.fromHtml(tagName);
+				spTagZeit = Html.fromHtml(tagZeit + "</center>");
+				
+				tvTagName.setText(spTagName);
+				tvTagZeit.setText(spTagZeit);
 				// navigationsbutton
 				NavigateData nd = new NavigateData(0.0, 0.0, 
 		        		si.getLatitude(), si.getLongtitude());

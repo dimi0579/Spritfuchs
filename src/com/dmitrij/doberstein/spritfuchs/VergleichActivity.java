@@ -1,6 +1,8 @@
 package com.dmitrij.doberstein.spritfuchs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import android.annotation.TargetApi;
@@ -25,11 +27,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.dmitrij.doberstein.spritfuchs.adapters.CustomListAdapterNew;
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
-//import com.dmitrij.doberstein.spritfuchs.dataclasses.CustomListAdapter;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.Day;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.FuelSort;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.NavigateData;
@@ -40,6 +42,7 @@ import com.dmitrij.doberstein.spritfuchs.dataclasses.StationItem;
 import com.dmitrij.doberstein.spritfuchs.dataclasses.TankstellenPosition;
 import com.dmitrij.doberstein.spritfuchs.httpconnection.AsyncCallWSGetHttp;
 import com.dmitrij.doberstein.spritfuchs.listeners.MyListener;
+import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -47,6 +50,13 @@ public class VergleichActivity extends Activity implements  MyListener{
 	private static final int RESULT_SETTINGS = 1;	
 	
 	public ListView lv1;
+	
+	public ImageButton btPreisSort;
+	public ImageButton btEntfernungSort;
+	public ImageButton btZeitSort;
+	
+	public ArrayList<StationItem> siData;
+	
 //	LocationManager locationManager;
 	
 	private String xlat = "";
@@ -62,11 +72,40 @@ public class VergleichActivity extends Activity implements  MyListener{
 		ab.setDisplayHomeAsUpEnabled(true);
 		
 		
-        lv1 = (ListView) findViewById(R.id.list_tankstellen);
-//        lv1.setAdapter(new CustomListAdapter(this, image_details));
-        
+		btEntfernungSort = (ImageButton)findViewById(R.id.btEntfernungSort);
+		
+		btEntfernungSort.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Utils.Sortation.setSettingsSortation(VergleichActivity.this, Utils.Sortation.SORTDESTINATION);
+				siData = sortDataList(siData);
+				lv1.setAdapter(new CustomListAdapterNew(VergleichActivity.this, siData));
+			}
+		});
+		btPreisSort = (ImageButton)findViewById(R.id.btPreisSort);
+		btPreisSort.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Utils.Sortation.setSettingsSortation(VergleichActivity.this, Utils.Sortation.SORTPRICE);
+				siData = sortDataList(siData);
+				lv1.setAdapter(new CustomListAdapterNew(VergleichActivity.this, siData));
+			}
+		});
+		btZeitSort = (ImageButton)findViewById(R.id.btZeitSort);
+		btZeitSort.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Utils.Sortation.setSettingsSortation(VergleichActivity.this, Utils.Sortation.SORTPRICETIMESTAMP);
+				siData = sortDataList(siData);
+				lv1.setAdapter(new CustomListAdapterNew(VergleichActivity.this, siData));
+			}
+		});
+		
+        lv1 = (ListView) findViewById(R.id.list_tankstellen);        
         lv1.setOnItemClickListener(new OnItemClickListener() {
- 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
 //            	TankstellenPosition tp = (TankstellenPosition)a.getItemAtPosition(position);
@@ -78,7 +117,6 @@ public class VergleichActivity extends Activity implements  MyListener{
 					startActivity(intent);
             	}
             }
- 
         });
         
      // gps location
@@ -90,10 +128,28 @@ public class VergleichActivity extends Activity implements  MyListener{
  			System.out.println("test");
  		}		
 	}
-		
+	
+	private ArrayList<StationItem> sortDataList(ArrayList<StationItem> data){
+		FuelSort fs = Utils.getSettingsFuelSort(this);
+		int sort = Utils.Sortation.getSettingsSortaion(this);
+
+		//	1 - Preis
+		//	2 - Entferung
+		//	3 - Zeit
+		switch(sort){
+		case 3:
+			return Utils.Sortation.sortStationItemListOnPriceTimestamp(data, fs);
+		case 2:
+			return Utils.Sortation.sortStationItemListOnDestination(data);
+		default:
+			return Utils.Sortation.sortStationItemListOnPrice(data, fs);
+		}
+	}
 	public void setListView(ArrayList<StationItem> data){
 		if(data.size() > 0){
-			lv1.setAdapter(new CustomListAdapterNew(this, data)); // -- new Adaprter reale daten
+			
+			this.siData = sortDataList(data);
+			lv1.setAdapter(new CustomListAdapterNew(this, siData)); // -- new Adaprter reale daten
 //			lv1.setAdapter(new CustomListAdapterNew(this, getListData())); // -- new Adaprter test
 //			lv1.setAdapter(new CustomListAdapter(this, getListData())); // -- old Adaprter test
 //			lv1.setAdapter(new CustomListAdapter(this, data)); -- original
@@ -111,61 +167,61 @@ public class VergleichActivity extends Activity implements  MyListener{
 		}
 	}
 	
-	private ArrayList<StationItem> getListData(){
-		ArrayList<StationItem> ret = new ArrayList<StationItem>();
-		
-		List<Openingtime> openingTimes = new ArrayList<Openingtime>();
-		Openingtime ptMO = new Openingtime(Day.MONDAY, "00:00", "23:59");
-		openingTimes.add(ptMO);
-		Openingtime ptDI = new Openingtime(Day.TUESDAY, "00:00", "23:59");
-		openingTimes.add(ptDI);
-		Openingtime ptMI = new Openingtime(Day.WEDNESDAY, "00:00", "23:59");
-		openingTimes.add(ptMI);
-		Openingtime ptDO = new Openingtime(Day.THURSDAY, "00:00", "23:59");
-		openingTimes.add(ptDO);
-		Openingtime ptFR = new Openingtime(Day.FRIDAY, "00:00", "23:59");
-		openingTimes.add(ptFR);
-		Openingtime ptSA = new Openingtime(Day.SATURDAY, "00:00", "23:59");
-		openingTimes.add(ptSA);
-		Openingtime ptSO = new Openingtime(Day.SUNDAY, "00:00", "23:59");
-		openingTimes.add(ptSO);
-		Openingtime ptFE = new Openingtime(Day.HOLLIDAY, "00:00", "23:59");
-		openingTimes.add(ptFE);
-		
-		List<Price> prices = new ArrayList<Price>();
-		Price price = new Price(FuelSort.E5, 1.345, new Date());
-		prices.add(price);
-		price = new Price(FuelSort.E10, 1.345, new Date());
-		prices.add(price);
-		price = new Price(FuelSort.DIESEL, 1.345, new Date());
-		prices.add(price);
-		
-		StationItem si = new StationItem(null, "1", "AGIP Überlingen", StationBrand.AGIP, 
-				"NussdorferStr.", "1", "Überlingen", 88662, 47.766175, 9.170277, 0.5, prices);
-		ret.add(si);
-		
-		si = new StationItem(null, "1", "ARAL Meersburg", StationBrand.ARAL, 
-				"NussdorferStr.", "1", "Meersburg", 88662, 47.696957, 9.272724, (double)12, prices);
-		ret.add(si);
-		
-		si = new StationItem(null, "1", "AVIA Stockach", StationBrand.AVIA, 
-				"NussdorferStr.", "1", "Stockach", 88662, 47.853164, 9.009153, (double)9.5, prices);
-		ret.add(si);
-		
-		si = new StationItem(null, "1", "BP Singen", StationBrand.BP, 
-				"NussdorferStr.", "1", "Singen", 88662, 47.764064, 8.853396, (double)23.6, prices);
-		ret.add(si);
-		
-		si = new StationItem(null, "1", "TEST Konstanz", StationBrand.DEFAULT, 
-				"NussdorferStr.", "1", "Konstanz", 88662, 47.677950, 9.173238, (double)32.2, prices);
-		ret.add(si);
-
-//		StationItem(List<Openingtime> openingTimes, String id, String name,
-//				String mark, String street, int houseNumber, String city,
-//				int cityCode, double latitude, double longtitude, long destination,
-//				Price price)
-		return ret;
-	}
+//	private ArrayList<StationItem> getListData(){
+//		ArrayList<StationItem> ret = new ArrayList<StationItem>();
+//		
+//		List<Openingtime> openingTimes = new ArrayList<Openingtime>();
+//		Openingtime ptMO = new Openingtime(Day.MONDAY, "00:00", "23:59");
+//		openingTimes.add(ptMO);
+//		Openingtime ptDI = new Openingtime(Day.TUESDAY, "00:00", "23:59");
+//		openingTimes.add(ptDI);
+//		Openingtime ptMI = new Openingtime(Day.WEDNESDAY, "00:00", "23:59");
+//		openingTimes.add(ptMI);
+//		Openingtime ptDO = new Openingtime(Day.THURSDAY, "00:00", "23:59");
+//		openingTimes.add(ptDO);
+//		Openingtime ptFR = new Openingtime(Day.FRIDAY, "00:00", "23:59");
+//		openingTimes.add(ptFR);
+//		Openingtime ptSA = new Openingtime(Day.SATURDAY, "00:00", "23:59");
+//		openingTimes.add(ptSA);
+//		Openingtime ptSO = new Openingtime(Day.SUNDAY, "00:00", "23:59");
+//		openingTimes.add(ptSO);
+//		Openingtime ptFE = new Openingtime(Day.HOLLIDAY, "00:00", "23:59");
+//		openingTimes.add(ptFE);
+//		
+//		List<Price> prices = new ArrayList<Price>();
+//		Price price = new Price(FuelSort.E5, 1.345, new Date());
+//		prices.add(price);
+//		price = new Price(FuelSort.E10, 1.345, new Date());
+//		prices.add(price);
+//		price = new Price(FuelSort.DIESEL, 1.345, new Date());
+//		prices.add(price);
+//		
+//		StationItem si = new StationItem(null, "1", "AGIP Überlingen", StationBrand.AGIP, 
+//				"NussdorferStr.", "1", "Überlingen", 88662, 47.766175, 9.170277, 0.5, prices);
+//		ret.add(si);
+//		
+//		si = new StationItem(null, "1", "ARAL Meersburg", StationBrand.ARAL, 
+//				"NussdorferStr.", "1", "Meersburg", 88662, 47.696957, 9.272724, (double)12, prices);
+//		ret.add(si);
+//		
+//		si = new StationItem(null, "1", "AVIA Stockach", StationBrand.AVIA, 
+//				"NussdorferStr.", "1", "Stockach", 88662, 47.853164, 9.009153, (double)9.5, prices);
+//		ret.add(si);
+//		
+//		si = new StationItem(null, "1", "BP Singen", StationBrand.BP, 
+//				"NussdorferStr.", "1", "Singen", 88662, 47.764064, 8.853396, (double)23.6, prices);
+//		ret.add(si);
+//		
+//		si = new StationItem(null, "1", "TEST Konstanz", StationBrand.DEFAULT, 
+//				"NussdorferStr.", "1", "Konstanz", 88662, 47.677950, 9.173238, (double)32.2, prices);
+//		ret.add(si);
+//
+////		StationItem(List<Openingtime> openingTimes, String id, String name,
+////				String mark, String street, int houseNumber, String city,
+////				int cityCode, double latitude, double longtitude, long destination,
+////				Price price)
+//		return ret;
+//	}
 
 //	private ArrayList<TankstellenPosition> getListData() {
 //        ArrayList<TankstellenPosition> results = new ArrayList<TankstellenPosition>();

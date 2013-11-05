@@ -50,26 +50,27 @@ public class CustomListAdapterNew extends BaseAdapter {
         return position;
     }
  
-    private FuelSort getFuelSortFromSettings(){
-    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.cont);
-        String strKraftstoff = prefs.getString("prefKraftstoff", "1");
-        int intKraftstoff = 1;
-        try {
-			intKraftstoff = Integer.parseInt(strKraftstoff);
-		} 
-        catch (Exception e) {
-		}
-        
-        if(intKraftstoff == 3){
-        	return FuelSort.DIESEL;
-        }
-        else if(intKraftstoff == 2){
-        	return FuelSort.E10;
-        }
-        else{
-        	return FuelSort.E5;
-        }
-    }
+//    @SuppressWarnings("unused")
+//	private FuelSort getFuelSortFromSettings(){
+//    	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.cont);
+//        String strKraftstoff = prefs.getString("prefKraftstoff", "1");
+//        int intKraftstoff = 1;
+//        try {
+//			intKraftstoff = Integer.parseInt(strKraftstoff);
+//		} 
+//        catch (Exception e) {
+//		}
+//        
+//        if(intKraftstoff == 3){
+//        	return FuelSort.DIESEL;
+//        }
+//        else if(intKraftstoff == 2){
+//        	return FuelSort.E10;
+//        }
+//        else{
+//        	return FuelSort.E5;
+//        }
+//    }
     
     @SuppressWarnings("unused")
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -115,7 +116,7 @@ public class CustomListAdapterNew extends BaseAdapter {
         if(asp != null){
         	for(int i = 0; i < asp.size(); i++){
         		Price sp = asp.get(i);
-        		switch(getFuelSortFromSettings()){
+        		switch(Utils.getSettingsFuelSort(this.cont)){
         		// E5
         		case E5:
         			fuelsort = "E5";
