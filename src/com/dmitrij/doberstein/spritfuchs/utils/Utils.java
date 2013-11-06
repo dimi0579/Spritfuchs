@@ -485,7 +485,8 @@ public class Utils {
 		        	double priceA = a.getPrices().get(index).getPrice();
 		        	double priceB = b.getPrices().get(index).getPrice();
 		        	
-		            return ((int) (priceA - priceB) * 1000);
+		        	return (int) (new Double(priceA)).compareTo(new Double(priceB));
+//		            return ((int) (priceA - priceB) * 1000);
 		        }
 		    });
 			index = 0;
@@ -521,7 +522,8 @@ public class Utils {
 		        	Date dateA = a.getPrices().get(index).getTimestamp();
 		        	Date dateB = b.getPrices().get(index).getTimestamp();
 		        	
-		            return ((int) (dateA.getTime() - dateB.getTime()));
+		        	return dateB.compareTo(dateA);		        	
+//		            return ((int) (dateB.getTime() - dateA.getTime()));
 		        }
 		    });
 			index = 0;
@@ -544,7 +546,8 @@ public class Utils {
 		        	double destinationA = a.getDestination();
 		        	double destinationB = b.getDestination();
 		        	
-		            return ((int) (destinationA - destinationB) * 1000);
+		        	return (int)(new Double(destinationA).compareTo(new Double(destinationB)));
+//		            return ((int) (destinationA - destinationB) * 1000000);
 		        }
 		    });
 			index = 0;

@@ -114,11 +114,11 @@ public class VergleichActivityListDetail extends Activity implements  MyListener
 					FuelSort fs = Utils.getSettingsFuelSort(this);
 					if(fs == price.getFuel()){
 						sorte += "<b><big>" + price.getFuel() + "</big></b><br/>";
-						sortenPreis += "<b><big>€ " + price.getPrice() + "</big></b><br/>";
+						sortenPreis += "<b><big>€ " + String.format("%.3f", price.getPrice()) + "</big></b><br/>";
 					}
 					else{
 						sorte += price.getFuel() + "<br/>";
-						sortenPreis += "€ " + price.getPrice() + "<br/>";
+						sortenPreis += "€ " + String.format("%.3f", price.getPrice()) + "<br/>";
 					}
 				}
 				sdSorte = Html.fromHtml(sorte);

@@ -140,13 +140,16 @@ public class CustomListAdapterNew extends BaseAdapter {
         		cal.setTime(ts);
 //        		cal.setTimeInMillis(ts * 1000);
         		
+        		String jahr = "" + cal.get(Calendar.YEAR);
+        		String monat = cal.get(Calendar.MONTH) < 10 ? "0" + cal.get(Calendar.MONTH) : "" + cal.get(Calendar.MONTH);
+        		String day = cal.get(Calendar.DAY_OF_MONTH) < 10 ? "0" + cal.get(Calendar.DAY_OF_MONTH) : "" + cal.get(Calendar.DAY_OF_MONTH);
+        		
         		String stunden = (cal.get(Calendar.HOUR)) < 10 ? "0" + cal.get(Calendar.HOUR) : "" + cal.get(Calendar.HOUR);
         		String minuten = (cal.get(Calendar.MINUTE)) < 10 ? "0" + cal.get(Calendar.MINUTE) : "" + cal.get(Calendar.MINUTE);
         		String sekunden = (cal.get(Calendar.SECOND)) < 10 ? "0" + cal.get(Calendar.SECOND) : "" + cal.get(Calendar.SECOND);
         		
-        		timestamp = stunden + ":" +
-        				minuten + ":" + 
-        				sekunden + "\n";
+        		timestamp = day + "." + monat + "." + jahr + "<br>" +
+        				stunden + ":" + minuten + ":" + sekunden;
         		
         		// Entfernung
         		double distanz = tp.getDestination();
@@ -155,7 +158,7 @@ public class CustomListAdapterNew extends BaseAdapter {
         		dist = String.format("%.2f", distanz) + distStr;
         		
         		// Preis
-        		String preis = "€ " + sp.getPrice();
+        		String preis = "€ " + String.format("%.3f",sp.getPrice());
     			holder.tvTPreis.setText(preis);
     			break;
         	}

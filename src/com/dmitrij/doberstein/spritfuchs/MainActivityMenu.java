@@ -1,6 +1,7 @@
 package com.dmitrij.doberstein.spritfuchs;
 
 import com.dmitrij.doberstein.spritfuchs.connectivity.CheckWifiGpsConnectivity;
+import com.dmitrij.doberstein.spritfuchs.utils.Utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -121,6 +122,7 @@ public class MainActivityMenu extends Activity {
 				CheckWifiGpsConnectivity c = new CheckWifiGpsConnectivity(this);
 				boolean check = c.checkConnectivity();
 				if(check){
+					Utils.Sortation.setSettingsSortation(this, 1);
 					intent = new Intent(MainActivityMenu.this, VergleichActivity.class);
 					startActivity(intent);
 				}
