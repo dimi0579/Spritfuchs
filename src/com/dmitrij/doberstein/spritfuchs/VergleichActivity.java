@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -75,9 +76,9 @@ public class VergleichActivity extends Activity implements  MyListener{
 		btEntfernungSort = (ImageButton)findViewById(R.id.btEntfernungSort);
 		
 		btEntfernungSort.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
+				setButtonBackgroundDestinationSort();
 				Utils.Sortation.setSettingsSortation(VergleichActivity.this, Utils.Sortation.SORTDESTINATION);
 				siData = sortDataList(siData);
 				lv1.setAdapter(new CustomListAdapterNew(VergleichActivity.this, siData));
@@ -88,6 +89,7 @@ public class VergleichActivity extends Activity implements  MyListener{
 			
 			@Override
 			public void onClick(View v) {
+				setButtonBackgroundPriceSort();
 				Utils.Sortation.setSettingsSortation(VergleichActivity.this, Utils.Sortation.SORTPRICE);
 				siData = sortDataList(siData);
 				lv1.setAdapter(new CustomListAdapterNew(VergleichActivity.this, siData));
@@ -98,11 +100,15 @@ public class VergleichActivity extends Activity implements  MyListener{
 			
 			@Override
 			public void onClick(View v) {
+				setButtonBackgroundTimeSort();
 				Utils.Sortation.setSettingsSortation(VergleichActivity.this, Utils.Sortation.SORTPRICETIMESTAMP);
 				siData = sortDataList(siData);
 				lv1.setAdapter(new CustomListAdapterNew(VergleichActivity.this, siData));
 			}
 		});
+		
+		// hintergrund von sortButtons setzen
+		setButtonBackgroundPriceSort();
 		
         lv1 = (ListView) findViewById(R.id.list_tankstellen);        
         lv1.setOnItemClickListener(new OnItemClickListener() {
@@ -127,6 +133,27 @@ public class VergleichActivity extends Activity implements  MyListener{
  		} catch (Exception e) {
  			System.out.println("test");
  		}		
+	}
+	
+	private void setButtonBackgroundPriceSort(){
+		// hintergrund von sortButtons setzen
+		btPreisSort.setBackgroundColor(Color.parseColor("#004bca"));
+		btEntfernungSort.setBackgroundColor(Color.LTGRAY);
+		btZeitSort.setBackgroundColor(Color.LTGRAY);
+	}
+	
+	private void setButtonBackgroundDestinationSort(){
+		// hintergrund von sortButtons setzen
+		btPreisSort.setBackgroundColor(Color.LTGRAY);
+		btEntfernungSort.setBackgroundColor(Color.parseColor("#004bca"));
+		btZeitSort.setBackgroundColor(Color.LTGRAY);
+	}
+	
+	private void setButtonBackgroundTimeSort(){
+		// hintergrund von sortButtons setzen
+		btPreisSort.setBackgroundColor(Color.LTGRAY);
+		btEntfernungSort.setBackgroundColor(Color.LTGRAY);
+		btZeitSort.setBackgroundColor(Color.parseColor("#004bca"));
 	}
 	
 	private ArrayList<StationItem> sortDataList(ArrayList<StationItem> data){
@@ -424,7 +451,7 @@ public class VergleichActivity extends Activity implements  MyListener{
 		// get Umkreis -> default - 5 km
 		String tempUmkreis = prefs.getString("prefUmkreis", "5");
 		
-		// get Kraftstoff -> default - Diesel (1)
+		// get Kraftstoff -> default - E5 (1)
 		String tempKraftstoff = prefs.getString("prefKraftstoff", "1");
 		
 		xlat = xlat.replace(",", ".").trim();

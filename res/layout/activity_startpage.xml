@@ -4,7 +4,7 @@
     android:orientation="vertical" 
     android:layout_marginTop="50dp"
     
-    android:background="#CAE1FF"
+    android:background="#f7f7f7"
     >
 
     <LinearLayout

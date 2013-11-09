@@ -115,21 +115,25 @@ public class CustomListAdapterNew extends BaseAdapter {
         List<Price> asp = tp.getPrices();
         if(asp != null){
         	for(int i = 0; i < asp.size(); i++){
-        		Price sp = asp.get(i);
+        		Price sp = null;// asp.get(i);
         		switch(Utils.getSettingsFuelSort(this.cont)){
         		// E5
         		case E5:
         			fuelsort = "E5";
+        			sp = asp.get(0);
         			break;
         		// E10
         		case E10:
         			fuelsort = "E10";
+        			sp = asp.get(1);
         			break;
         		// Diesel
         		case DIESEL:
         			fuelsort = "Diesel";
+        			sp = asp.get(2);
         			break;
         		default:
+        			sp = asp.get(0);
         			break;
         		}
         		// TImestamp

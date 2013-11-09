@@ -4,10 +4,10 @@
     android:layout_height="fill_parent"
 
     
-    
-    android:background="#CAE1FF"
+    android:background="#f7f7f7"
     >
 
+    <!-- android:background="#CAE1FF"-->
     
 	    
 	<TableLayout 
@@ -26,32 +26,37 @@
 	        <ImageButton 
 	            android:id="@+id/btPreisSort"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_height="30dp"
 	            android:src="@drawable/tankstelle24"
-	            android:layout_marginTop="-5dp"
+	            android:layout_marginTop="-0dp"
 	            android:layout_marginLeft="-5dp"
 	            android:layout_marginRight="-5dp"
+	            android:background="#004bca"
 	            
 	            android:layout_weight="1"
 	            />
 	        <ImageButton 
 	            android:id="@+id/btEntfernungSort"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_height="30dp"
 	            android:src="@drawable/tankstelle24"
-	            android:layout_marginTop="-5dp"
-	            android:layout_marginLeft="-3dp"
-	            android:layout_marginRight="-5dp"
+	            android:layout_marginTop="-0dp"
+	            android:layout_marginLeft="-4dp"
+	            android:layout_marginRight="-6dp"
+	            android:background="#004bca"
+	            
 	            android:layout_weight="1"
 	            />
 	        <ImageButton 
 	            android:id="@+id/btZeitSort"
 	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_height="30dp"
 	            android:src="@drawable/tankstelle24"
-	            android:layout_marginTop="-5dp"
+	            android:layout_marginTop="-0dp"
 	            android:layout_marginLeft="-3dp"
 	            android:layout_marginRight="-5dp"
+	            android:background="#004bca"
+	            
 	            android:layout_weight="1"
 	            />
 	        </TableRow>
@@ -59,16 +64,28 @@
 
 	    
     
+    <TextView
+        android:id="@+id/tvGewaehr"
+        android:layout_width="fill_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tableLayout1"
+        
+        android:textSize="11sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Alle Angaben ohne Gewähr..." />
+    
     <ListView
 	  android:id="@+id/list_tankstellen"
 	  android:layout_width="match_parent"
 	  android:layout_height="wrap_content"
 	  android:focusable="false" 
-	  android:layout_below="@id/tableLayout1"
+	  android:layout_below="@id/tvGewaehr"
 	  
 	  
 	  
 	  >
 	</ListView>
+
 
 </RelativeLayout>

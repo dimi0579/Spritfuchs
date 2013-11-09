@@ -27,7 +27,8 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
  
         addPreferencesFromResource(R.xml.settings);
-        findViewById(android.R.id.list).setBackgroundColor(Color.parseColor("#CAE1FF"));
+//        findViewById(android.R.id.list).setBackgroundColor(Color.parseColor("#CAE1FF"));
+        findViewById(android.R.id.list).setBackgroundColor(Color.parseColor("#f7f7f7"));
         
 		
         

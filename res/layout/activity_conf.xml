@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ConfActivity" 
     
-    android:background="#CAE1FF"
+    android:background="#f7f7f7"
     >
 
     <TextView
